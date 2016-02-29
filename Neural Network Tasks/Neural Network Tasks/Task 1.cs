@@ -10,9 +10,9 @@ using System.Windows.Forms;
 
 namespace Neural_Network_Tasks
 {
-    public partial class Tasks : Form
+    public partial class Task_1 : Form
     {
-        public Tasks()
+        public Task_1()
         {
             InitializeComponent();
         }

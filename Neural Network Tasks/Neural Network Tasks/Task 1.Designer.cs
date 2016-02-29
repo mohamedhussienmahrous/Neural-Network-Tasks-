@@ -1,6 +1,6 @@
 ﻿namespace Neural_Network_Tasks
 {
-    partial class Tasks
+    partial class Task_1
     {
         /// <summary>
         /// Required designer variable.
@@ -28,20 +28,11 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.SuspendLayout();
-            // 
-            // Tasks
-            // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.components = new System.ComponentModel.Container();
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(498, 581);
-            this.Name = "Tasks";
-            this.Text = "Form1";
-            this.ResumeLayout(false);
-
+            this.Text = "Task_1";
         }
 
         #endregion
     }
 }
-
