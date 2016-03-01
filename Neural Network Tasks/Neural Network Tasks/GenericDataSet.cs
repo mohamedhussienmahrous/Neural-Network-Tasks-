@@ -13,7 +13,7 @@ namespace Neural_Network_Tasks
             number_of_samples_per_state_of_nature,
             number_of_training_samples_per_state_of_nature,
             number_of_test_samples_per_state_of_nature;
-
+        public string FeaturesLable;
         public Generic_State_Of_Nature[] array_of_states_natures;
 
         public GenericDataSet(
@@ -44,22 +44,25 @@ namespace Neural_Network_Tasks
                     );
             }
 
-            read_data_set_from_file_stream(_data_set_file_stream, _file_delimeter);
+           FeaturesLable =read_data_set_from_file_stream(_data_set_file_stream, _file_delimeter);
 
             for (int i = 0; i < number_of_states_of_nature; i++)
             {
             }
         }
 
-        public void read_data_set_from_file_stream(Stream _data_set_file_stream, char _file_delimeter)
+        public string read_data_set_from_file_stream(Stream _data_set_file_stream, char _file_delimeter)
         {
             _data_set_file_stream.Seek(0, SeekOrigin.Begin);
             StreamReader obj_sr = new StreamReader(_data_set_file_stream);
             
             string line = obj_sr.ReadLine();
-            line = obj_sr.ReadLine();
+
+            string features = line;
             int current_index = 0;
             int category_index = 0;
+            line = obj_sr.ReadLine();
+            
             while (!string.IsNullOrEmpty(line))
             {
                 string[] array_tokens = line.Split(_file_delimeter);
@@ -96,6 +99,8 @@ namespace Neural_Network_Tasks
 
                 line = obj_sr.ReadLine();
             }
+            return features;
+        
         }
     }
 }
