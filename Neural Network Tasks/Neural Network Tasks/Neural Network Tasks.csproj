@@ -34,6 +34,7 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Windows.Forms.DataVisualization" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -56,6 +57,7 @@
     </Compile>
     <Compile Include="GenericDataSet.cs" />
     <Compile Include="Generic_State_Of_Nature.cs" />
+    <Compile Include="Graphdrawing.cs" />
     <Compile Include="IrisDataset.cs" />
     <Compile Include="Matrix.cs" />
     <Compile Include="Perceptron.cs" />

@@ -53,8 +53,9 @@ namespace Neural_Network_Tasks
             MessageBox.Show("File Loaded!");
         }
 
-        public void Apply(string F1,string F2)
+        public void Apply(int F1,int F2)
         {
+            Graphdrawing.draw(array_states_of_nature[F1].test_samples[0].features_values[0,1], array_states_of_nature[F2].test_samples[0].features_values[0,1]);
             if (F1 == F2)
             {
                 MessageBox.Show("You Must Choose Different Features!!!!!!");
