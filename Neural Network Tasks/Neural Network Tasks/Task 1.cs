@@ -30,7 +30,7 @@ namespace Neural_Network_Tasks
         private void button2_Click(object sender, EventArgs e)
         {
             
-         //  new Task_1_View_Handler().Apply(comboBox1.SelectedItem.ToString(),comboBox2.SelectedItem.ToString());
+            new Task_1_View_Handler().Apply(chart1,comboBox1.SelectedIndex,comboBox2.SelectedIndex);
         }
 
         private void chart1_Click(object sender, EventArgs e)

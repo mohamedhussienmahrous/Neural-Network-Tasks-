@@ -10,20 +10,21 @@ namespace Neural_Network_Tasks
 {
     static class Graphdrawing
     {
-        static public Chart chart = null;
-        static public Chart draw(double[] Y, double[] X)
+        static public Chart chart ;
+        static public Chart draw(Chart Cht, double[,] Y, double[,] X)
         {
+            chart = Cht;
             //chart.Series.;
             for (int g = 0; g < Y.Length; g++)
             {
-                chart.Series["Series1"].Points.AddXY(X[g], Y[g]);
+                chart.Series["Series1"].Points.AddXY(X[0,g], Y[0,g]);
             }
 
             chart.Series["Series1"].ChartType = SeriesChartType.Point;
             chart.Series["Series1"].Color = Color.Red;
 
 
-            return null;
+            return chart;
         }
        
     }
