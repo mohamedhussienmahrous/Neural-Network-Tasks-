@@ -16,5 +16,9 @@ namespace Neural_Network_Tasks
             V += Bais;
             return V;
         }
+        public double ApplySpeacialAdder(double Bias,double W1,double W2,double X1,double X2)
+        {
+            return (Bias + W1 * X1 + W2 * X2);
+        }
     }
 }

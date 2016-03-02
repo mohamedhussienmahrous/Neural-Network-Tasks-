@@ -70,6 +70,21 @@ namespace Neural_Network_Tasks
         
             }
         }
+        public void ApplyDrawing(ref Chart c, int F1, int F2)
+        {
+            c = Graphdrawing.draw(c, array_states_of_nature[0].test_samples[F1].features_values, array_states_of_nature[1].test_samples[0].features_values);
+            if (F1 == F2)
+            {
+                MessageBox.Show("You Must Choose Different Features!!!!!!");
+            }
+            else
+            {
+
+                //apply_bayesian_inference();
+                // display_results(confusion_matrix_control, overall_accuracy_control);
+
+            }
+        }
         public void apply_bayesian_inference()
         {
             confusion_matrix = new int[number_of_states_of_nature, number_of_states_of_nature];

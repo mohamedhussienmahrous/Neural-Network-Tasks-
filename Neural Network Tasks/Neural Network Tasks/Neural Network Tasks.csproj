@@ -45,6 +45,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ActivationFunctions.cs" />
     <Compile Include="Adder.cs" />
     <Compile Include="benchmark.cs" />
     <Compile Include="DataGridView_Helpers.cs" />
