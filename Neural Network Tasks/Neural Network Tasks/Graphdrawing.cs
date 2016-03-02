@@ -10,14 +10,14 @@ namespace Neural_Network_Tasks
 {
     static class Graphdrawing
     {
-        static public Chart chart ;
+        static public Chart chart;
         static public Chart draw(Chart Cht, double[,] Y, double[,] X)
         {
             chart = Cht;
             //chart.Series.;
             for (int g = 0; g < Y.Length; g++)
             {
-                chart.Series["Series1"].Points.AddXY(X[0,g], Y[0,g]);
+                chart.Series["Series1"].Points.AddXY(X[g,0], Y[g,0]);
             }
 
             chart.Series["Series1"].ChartType = SeriesChartType.Point;
@@ -26,6 +26,6 @@ namespace Neural_Network_Tasks
 
             return chart;
         }
-       
+
     }
 }
