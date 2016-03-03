@@ -59,38 +59,20 @@ namespace Neural_Network_Tasks
         public void Apply(ref Chart c, int F1, int F2)
         {
 
-            c.Series.Clear();
-           
-
-
-            for (int g = 0; g < array_states_of_nature.Length; g++)
-            {
-                c.Series.Add(array_states_of_nature[g].label);
-                c = Graphdrawing.draw(c, array_states_of_nature[g].test_samples, array_states_of_nature[g].test_samples, F1, F2, c.Series[g].Name);
-
-                
-            }
-            c.Series[array_states_of_nature[0].label].Color = Color.Green;
-            c.Series[array_states_of_nature[1].label].Color = Color.Red;
-            c.Series[array_states_of_nature[2].label].Color = Color.Blue;
-            c.Series[array_states_of_nature[0].label].ChartType = SeriesChartType.Point;
-            c.Series[array_states_of_nature[1].label].ChartType = SeriesChartType.Point;
-            c.Series[array_states_of_nature[2].label].ChartType = SeriesChartType.Point;
+  
             if (F1 == F2)
             {
                 MessageBox.Show("You Must Choose Different Features!!!!!!");
             }
             else
             {
-
-                //apply_bayesian_inference();
-                // display_results(confusion_matrix_control, overall_accuracy_control);
+                ApplyDrawing(ref c, F1, F2);
 
             }
         }
         public void ApplyDrawing(ref Chart c, int F1, int F2)
         {
-            //c = Graphdrawing.draw(c, array_states_of_nature[0].test_samples[F1].features_values, array_states_of_nature[1].test_samples[0].features_values);
+           
             if (F1 == F2)
             {
                 MessageBox.Show("You Must Choose Different Features!!!!!!");
@@ -98,8 +80,21 @@ namespace Neural_Network_Tasks
             else
             {
 
-                //apply_bayesian_inference();
-                // display_results(confusion_matrix_control, overall_accuracy_control);
+                c.Series.Clear();
+
+                for (int g = 0; g < array_states_of_nature.Length; g++)
+                {
+                    c.Series.Add(array_states_of_nature[g].label);
+                    c = Graphdrawing.draw(c, array_states_of_nature[g].test_samples, array_states_of_nature[g].test_samples, F1, F2, c.Series[g].Name);
+
+
+                }
+                c.Series[array_states_of_nature[0].label].Color = Color.Green;
+                c.Series[array_states_of_nature[1].label].Color = Color.Red;
+                c.Series[array_states_of_nature[2].label].Color = Color.Blue;
+                c.Series[array_states_of_nature[0].label].ChartType = SeriesChartType.Point;
+                c.Series[array_states_of_nature[1].label].ChartType = SeriesChartType.Point;
+                c.Series[array_states_of_nature[2].label].ChartType = SeriesChartType.Point;
 
             }
         }

@@ -16,8 +16,10 @@ namespace Neural_Network_Tasks
         Task_1_View_Handler object_view_handler;
         public Task_1()
         {
+            
             InitializeComponent();
             object_view_handler = new Task_1_View_Handler();
+            chart1.Series.Clear();
         }
 
         private void button1_Click(object sender, EventArgs e)
