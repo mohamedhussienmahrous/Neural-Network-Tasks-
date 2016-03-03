@@ -11,14 +11,15 @@ namespace Neural_Network_Tasks
     static class Graphdrawing
     {
         static public Chart chart;
-        static public Chart draw(Chart Cht, Sample[] Y, Sample[] X, int F1, int F2)
+        static public Chart draw(Chart Cht, Sample[] Y, Sample[] X, int F1, int F2,string str)
         {
-            chart = Cht;
+            
             for (int g = 0; g < Y.Length; g++)
             {
-                chart.Series["Series1"].Points.AddXY(X[g].features_values[F1, 0], Y[g].features_values[F2, 0]);
+                Cht.Series[str].Points.AddXY(X[g].features_values[F1, 0], Y[g].features_values[F2, 0]);
+
            }
-            return chart;
+            return Cht;
         }
 
     }
