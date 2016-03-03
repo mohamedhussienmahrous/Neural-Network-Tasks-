@@ -14,7 +14,7 @@ namespace Neural_Network_Tasks
         int C1, C2, F1, F2, Epoch;
         double lamda;
 
-        public Perceptron(Generic_State_Of_Nature[] C, double B, double[] W, int c1, int c2, int Feature1, int Feature2,double lmada)
+        public Perceptron(Generic_State_Of_Nature[] C, double B, double[] W, int c1, int c2, int Feature1, int Feature2, double lmada)
         {
             F1 = Feature1;
             F2 = Feature2;
@@ -41,8 +41,8 @@ namespace Neural_Network_Tasks
                             d = 1;
                         else d = -1;
 
-                        Weights[0] = Weights[0] + lamda*(d - Y) * Classes[num].training_samples[i].features_values[F1, 0];
-                        Weights[1] = Weights[1] + lamda*(d - Y) * Classes[num].training_samples[i].features_values[F2, 0];
+                        Weights[0] = Weights[0] + lamda * (d - Y) * Classes[num].training_samples[i].features_values[F1, 0];
+                        Weights[1] = Weights[1] + lamda * (d - Y) * Classes[num].training_samples[i].features_values[F2, 0];
 
 
                     }
@@ -55,6 +55,13 @@ namespace Neural_Network_Tasks
                 Weights[i] = 0;
         }
 
-        //public int 
+        public bool testing(int classindex,Sample s)
+        {
+
+
+
+            return false;
+
+        }
     }
 }

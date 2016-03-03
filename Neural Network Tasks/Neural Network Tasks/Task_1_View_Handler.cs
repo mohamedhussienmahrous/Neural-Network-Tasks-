@@ -56,10 +56,8 @@ namespace Neural_Network_Tasks
             MessageBox.Show("File Loaded!");
         }
 
-        public void Apply(ref Chart c, int F1, int F2)
+        public void Apply(ref Chart c, int F1, int F2, string X)
         {
-
-
             if (F1 == F2)
             {
                 MessageBox.Show("You Must Choose Different Features!!!!!!");
@@ -67,7 +65,7 @@ namespace Neural_Network_Tasks
             else
             {
                 ApplyDrawing(ref c, F1, F2);
-                 Perceptron a = new Perceptron(array_states_of_nature,1,null,0,0,F1,F2,0.5);
+                Perceptron a = new Perceptron(array_states_of_nature, 1, null, 0, 0, F1, F2, Convert.ToDouble(X));
             }
         }
         public void ApplyDrawing(ref Chart c, int F1, int F2)
