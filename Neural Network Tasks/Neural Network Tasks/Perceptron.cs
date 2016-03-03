@@ -12,8 +12,9 @@ namespace Neural_Network_Tasks
         double Bias;
         Generic_State_Of_Nature[] Classes;
         int C1, C2, F1, F2, Epoch;
+        double lamda;
 
-        public Perceptron(Generic_State_Of_Nature[] C, double B, double[] W, int c1, int c2, int Feature1, int Feature2)
+        public Perceptron(Generic_State_Of_Nature[] C, double B, double[] W, int c1, int c2, int Feature1, int Feature2,int lmada)
         {
             F1 = Feature1;
             F2 = Feature2;
@@ -23,6 +24,7 @@ namespace Neural_Network_Tasks
             C1 = c1;
             C2 = c2;
             Weights = new double[2];
+            this.lamda = lmada;
 
         }
         public void Training()
@@ -39,8 +41,8 @@ namespace Neural_Network_Tasks
                             d = 1;
                         else d = -1;
 
-                        Weights[0] = Weights[0] + (d - Y) * Classes[num].training_samples[i].features_values[F1, 0];
-                        Weights[1] = Weights[1] + (d - Y) * Classes[num].training_samples[i].features_values[F2, 0];
+                        Weights[0] = Weights[0] + lamda*(d - Y) * Classes[num].training_samples[i].features_values[F1, 0];
+                        Weights[1] = Weights[1] + lamda*(d - Y) * Classes[num].training_samples[i].features_values[F2, 0];
 
 
                     }
