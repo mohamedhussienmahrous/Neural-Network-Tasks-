@@ -55,13 +55,14 @@ namespace Neural_Network_Tasks
                 Weights[i] = 0;
         }
 
-        public bool testing(int classindex,Sample s)
+        public bool testing(int classindex, Sample s, int F1, int F2)
         {
-
-
-
+            double V = new Adder().ApplySpeacialAdder(Bias, Weights[0], Weights[1], s.features_values[F1, 0], s.features_values[F2, 0]);
+            double Y = new ActivationFunctions().sign(V, C1, C2);
+            int d = 0;
+            if (d == Y)
+                return true;
             return false;
-
         }
     }
 }
