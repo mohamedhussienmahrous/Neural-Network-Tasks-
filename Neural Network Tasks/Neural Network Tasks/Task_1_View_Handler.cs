@@ -59,7 +59,7 @@ namespace Neural_Network_Tasks
         public void Apply(ref Chart c, int F1, int F2)
         {
 
-  
+
             if (F1 == F2)
             {
                 MessageBox.Show("You Must Choose Different Features!!!!!!");
@@ -72,16 +72,14 @@ namespace Neural_Network_Tasks
         }
         public void ApplyDrawing(ref Chart c, int F1, int F2)
         {
-           
+
             if (F1 == F2)
             {
                 MessageBox.Show("You Must Choose Different Features!!!!!!");
             }
             else
             {
-
                 c.Series.Clear();
-
                 for (int g = 0; g < array_states_of_nature.Length; g++)
                 {
                     c.Series.Add(array_states_of_nature[g].label);
