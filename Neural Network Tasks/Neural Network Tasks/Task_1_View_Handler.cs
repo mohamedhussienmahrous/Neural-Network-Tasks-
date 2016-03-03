@@ -60,23 +60,22 @@ namespace Neural_Network_Tasks
         {
 
             c.Series.Clear();
-            c.Series.Add("Class 1");
-            c.Series.Add("Class 2");
-            c.Series.Add("Class 3");
+           
 
 
             for (int g = 0; g < array_states_of_nature.Length; g++)
             {
+                c.Series.Add(array_states_of_nature[g].label);
                 c = Graphdrawing.draw(c, array_states_of_nature[g].test_samples, array_states_of_nature[g].test_samples, F1, F2, c.Series[g].Name);
+
+                
             }
-
-            c.Series["Class 1"].Color = Color.Green;
-            c.Series["Class 2"].Color = Color.Red;
-            c.Series["Class 3"].Color = Color.Blue;
-
-            c.Series["Class 1"].ChartType = SeriesChartType.Point;
-            c.Series["Class 2"].ChartType = SeriesChartType.Point;
-            c.Series["Class 3"].ChartType = SeriesChartType.Point;
+            c.Series[array_states_of_nature[0].label].Color = Color.Green;
+            c.Series[array_states_of_nature[1].label].Color = Color.Red;
+            c.Series[array_states_of_nature[2].label].Color = Color.Blue;
+            c.Series[array_states_of_nature[0].label].ChartType = SeriesChartType.Point;
+            c.Series[array_states_of_nature[1].label].ChartType = SeriesChartType.Point;
+            c.Series[array_states_of_nature[2].label].ChartType = SeriesChartType.Point;
             if (F1 == F2)
             {
                 MessageBox.Show("You Must Choose Different Features!!!!!!");
