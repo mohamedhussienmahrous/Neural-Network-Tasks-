@@ -31,7 +31,7 @@ namespace Neural_Network_Tasks
 
         private void button2_Click(object sender, EventArgs e)
         {
-
+           
             object_view_handler.Apply(ref chart1, comboBox1.SelectedIndex, comboBox2.SelectedIndex);
         }
         private void chart1_Click(object sender, EventArgs e)

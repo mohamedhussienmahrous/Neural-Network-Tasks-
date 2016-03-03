@@ -67,7 +67,7 @@ namespace Neural_Network_Tasks
             else
             {
                 ApplyDrawing(ref c, F1, F2);
-
+                 Perceptron a = new Perceptron(array_states_of_nature,1,null,0,0,F1,F2,0.5);
             }
         }
         public void ApplyDrawing(ref Chart c, int F1, int F2)

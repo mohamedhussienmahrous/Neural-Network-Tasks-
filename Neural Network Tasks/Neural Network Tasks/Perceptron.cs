@@ -14,7 +14,7 @@ namespace Neural_Network_Tasks
         int C1, C2, F1, F2, Epoch;
         double lamda;
 
-        public Perceptron(Generic_State_Of_Nature[] C, double B, double[] W, int c1, int c2, int Feature1, int Feature2,int lmada)
+        public Perceptron(Generic_State_Of_Nature[] C, double B, double[] W, int c1, int c2, int Feature1, int Feature2,double lmada)
         {
             F1 = Feature1;
             F2 = Feature2;
