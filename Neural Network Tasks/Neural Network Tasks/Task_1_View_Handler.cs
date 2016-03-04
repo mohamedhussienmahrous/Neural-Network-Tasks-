@@ -28,6 +28,7 @@ namespace Neural_Network_Tasks
         GenericDataSet object_data_set;
         DataGridView confusion_matrix_control;
         TextBox overall_accuracy_control;
+        Perceptron a;
         public void handle_load_data_set_button_click(ComboBox Cbx3, ComboBox Cbx4,ComboBox Cbx1, ComboBox Cbx2,
             Form parent_form,
             TextBox file_path_text_box,
@@ -62,8 +63,9 @@ namespace Neural_Network_Tasks
                 MessageBox.Show("File Loaded!");
         }
 
-        public void Apply(ref Chart c, int F1, int F2, int Class1,int class2,TextBox lamda,TextBox Epoch)
+        public double[] Apply(ref Chart c, int F1, int F2, int Class1,int class2,TextBox lamda,TextBox Epoch)
         {
+            double[] wieg = null;
             C1 = Class1;
             C2 = class2;
             if (F1 == F2||Class1==class2)
@@ -73,12 +75,12 @@ namespace Neural_Network_Tasks
             else
             {
                 ApplyDrawing(ref c, F1, F2,Class1,class2);
-                Perceptron a = new Perceptron(array_states_of_nature, 1, Class1, class2, F1, F2, int.Parse(Epoch.Text.ToString()), double.Parse(lamda.Text.ToString()));
-                a.Training();
+                a = new Perceptron(array_states_of_nature, 1, Class1, class2, F1, F2, int.Parse(Epoch.Text.ToString()), double.Parse(lamda.Text.ToString()));
+                wieg = a.Training();
                 confusion_matrix = new int[2, 2];
-            
-                    for (int j = 0; j < number_of_test_samples_per_state_of_nature; j++)
-                    {
+
+                for (int j = 0; j < number_of_test_samples_per_state_of_nature; j++)
+                {
                          int class_index = a.testing(array_states_of_nature[Class1].test_samples[j],F1,F2);
                         if(class_index==Class1)
                         confusion_matrix[0, 0]++;
@@ -101,6 +103,7 @@ namespace Neural_Network_Tasks
                 overall_accuracy /= (2 * number_of_test_samples_per_state_of_nature);
             }
             display_results(confusion_matrix_control,overall_accuracy_control);
+            return wieg;
         }
         public void ApplyDrawing(ref Chart c, int F1, int F2,int C1,int C2)
         {

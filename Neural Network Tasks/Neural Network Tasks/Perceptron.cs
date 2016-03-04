@@ -27,7 +27,7 @@ namespace Neural_Network_Tasks
             this.lamda = lamda;
 
         }
-        public void Training( )
+        public double[] Training()
         {
             for (int Ep = 0; Ep < Epoch; ++Ep)
             {
@@ -64,6 +64,7 @@ namespace Neural_Network_Tasks
 
 
             }
+            return Weights;
         }
     
 
