@@ -24,11 +24,11 @@ namespace Neural_Network_Tasks
             number_of_test_samples_per_state_of_nature = 20;
 
         const char file_delimeter = ',';
-
+        int C1, C2;
         GenericDataSet object_data_set;
         DataGridView confusion_matrix_control;
         TextBox overall_accuracy_control;
-        public void handle_load_data_set_button_click(ComboBox Cbx1, ComboBox Cbx2,
+        public void handle_load_data_set_button_click(ComboBox Cbx3, ComboBox Cbx4,ComboBox Cbx1, ComboBox Cbx2,
             Form parent_form,
             TextBox file_path_text_box,
             DataGridView dgrdv_confusion_matrix,
@@ -53,38 +53,73 @@ namespace Neural_Network_Tasks
 
             }
             array_states_of_nature = object_data_set.array_of_states_natures;
-            MessageBox.Show("File Loaded!");
+            for (int i = 0; i < array_states_of_nature.Length; ++i)
+            {
+                Cbx3.Items.Add(array_states_of_nature[i].label);
+                Cbx4.Items.Add(array_states_of_nature[i].label);
+
+            }
+                MessageBox.Show("File Loaded!");
         }
 
-        public void Apply(ref Chart c, int F1, int F2, string X)
+        public void Apply(ref Chart c, int F1, int F2, int Class1,int class2,TextBox lamda,TextBox Epoch)
         {
-            if (F1 == F2)
+            C1 = Class1;
+            C2 = class2;
+            if (F1 == F2||Class1==class2)
             {
-                MessageBox.Show("You Must Choose Different Features!!!!!!");
+                MessageBox.Show("You Must Choose Different Features Or Classes!!!!!!");
             }
             else
             {
-                ApplyDrawing(ref c, F1, F2);
-                Perceptron a = new Perceptron(array_states_of_nature, 1, null, 0, 0, F1, F2, Convert.ToDouble(X));
-            }
-        }
-        public void ApplyDrawing(ref Chart c, int F1, int F2)
-        {
-
-            if (F1 == F2)
-            {
-                MessageBox.Show("You Must Choose Different Features!!!!!!");
-            }
-            else
-            {
-                c.Series.Clear();
-                for (int g = 0; g < array_states_of_nature.Length; g++)
+                ApplyDrawing(ref c, F1, F2,Class1,class2);
+                Perceptron a = new Perceptron(array_states_of_nature, 1, Class1, class2, F1, F2, int.Parse(Epoch.Text.ToString()), double.Parse(lamda.Text.ToString()));
+                a.Training();
+                confusion_matrix = new int[2, 2];
+            
+                    for (int j = 0; j < number_of_test_samples_per_state_of_nature; j++)
+                    {
+                         int class_index = a.testing(array_states_of_nature[Class1].test_samples[j],F1,F2);
+                        if(class_index==Class1)
+                        confusion_matrix[0, 0]++;
+                        else   confusion_matrix[0, 1]++;
+                    }
+                    for (int j = 0; j < number_of_test_samples_per_state_of_nature; j++)
+                    {
+                        int class_index = a.testing(array_states_of_nature[class2].test_samples[j], F1, F2);
+                        if (class_index == Class1)
+                            confusion_matrix[1, 0]++;
+                        else confusion_matrix[1, 1]++;
+                        //confusion_matrix[1, class_index]++;
+                        //confusion_matrix[i, i]++;
+                    } 
+                overall_accuracy = 0;
+                for (int i = 0; i < 2; i++)
                 {
-                    c.Series.Add(array_states_of_nature[g].label);
-                    c = Graphdrawing.draw(c, array_states_of_nature[g].test_samples, array_states_of_nature[g].test_samples, F1, F2, c.Series[g].Name);
-
-
+                    overall_accuracy += confusion_matrix[i, i];
                 }
+                overall_accuracy /= (2 * number_of_test_samples_per_state_of_nature);
+            }
+            display_results(confusion_matrix_control,overall_accuracy_control);
+        }
+        public void ApplyDrawing(ref Chart c, int F1, int F2,int C1,int C2)
+        {
+                c.Series.Clear();
+               for (int cl = 0; cl < array_states_of_nature.Length; cl++)
+                {
+                    c.Series.Add(array_states_of_nature[cl].label);
+               } 
+            for (int S = 0; S < array_states_of_nature[C1].test_samples.Length;++S )
+                        c = Graphdrawing.DrawSample(c, array_states_of_nature[C1].test_samples[S], F1, F2, array_states_of_nature[C1].label);
+                     for (int T=0;T<array_states_of_nature[C1].training_samples.Length;++T)
+                         c = Graphdrawing.DrawSample(c, array_states_of_nature[C1].training_samples[T], F1, F2, array_states_of_nature[C1].label);
+
+                     for (int S = 0; S < array_states_of_nature[C2].test_samples.Length; ++S)
+                         c = Graphdrawing.DrawSample(c, array_states_of_nature[C2].test_samples[S], F1, F2, array_states_of_nature[C2].label);
+                     for (int T = 0; T < array_states_of_nature[C2].training_samples.Length; ++T)
+                         c = Graphdrawing.DrawSample(c, array_states_of_nature[C2].training_samples[T], F1, F2, array_states_of_nature[C2].label);
+            
+               //}
                 c.Series[array_states_of_nature[0].label].Color = Color.Green;
                 c.Series[array_states_of_nature[1].label].Color = Color.Red;
                 c.Series[array_states_of_nature[2].label].Color = Color.Blue;
@@ -92,26 +127,11 @@ namespace Neural_Network_Tasks
                 c.Series[array_states_of_nature[1].label].ChartType = SeriesChartType.Point;
                 c.Series[array_states_of_nature[2].label].ChartType = SeriesChartType.Point;
 
-            }
+            
         }
         public void apply_bayesian_inference()
         {
-            confusion_matrix = new int[number_of_states_of_nature, number_of_states_of_nature];
-            for (int i = 0; i < array_states_of_nature.Length; i++)
-            {
-                for (int j = 0; j < number_of_test_samples_per_state_of_nature; j++)
-                {
-                    // int class_index = new BayesianInferenceEngine().classify_using_discriminent_function(array_states_of_nature, array_states_of_nature[i].test_samples[j].features_values);
-                    //  confusion_matrix[i, class_index]++;
-                    //confusion_matrix[i, i]++;
-                }
-            }
-            overall_accuracy = 0;
-            for (int i = 0; i < number_of_states_of_nature; i++)
-            {
-                overall_accuracy += confusion_matrix[i, i];
-            }
-            overall_accuracy /= (number_of_states_of_nature * number_of_test_samples_per_state_of_nature);
+            
         }
 
         public void display_results(DataGridView dgrdv_confusion_matrix, TextBox textbox_overall_accuracy)
@@ -119,17 +139,16 @@ namespace Neural_Network_Tasks
             textbox_overall_accuracy.Text = overall_accuracy.ToString();
             DataGridView_Helpers object_data_grid_view_helpers = new DataGridView_Helpers();
             object_data_grid_view_helpers.add_grid_column("actions", "/", new DataGridViewTextBoxCell(), dgrdv_confusion_matrix);
-            for (int i = 0; i < number_of_states_of_nature; i++)
+           
+                object_data_grid_view_helpers.add_grid_column(array_states_of_nature[C1].label, array_states_of_nature[C1].label, new DataGridViewTextBoxCell(), dgrdv_confusion_matrix);
+                object_data_grid_view_helpers.add_grid_column(array_states_of_nature[C2].label, array_states_of_nature[C2].label, new DataGridViewTextBoxCell(), dgrdv_confusion_matrix);
+            
+
+                dgrdv_confusion_matrix.Rows.Add(array_states_of_nature[C1].label);
+                dgrdv_confusion_matrix.Rows.Add(array_states_of_nature[C2].label);            
+            for (int i = 0; i < 2; i++)
             {
-                object_data_grid_view_helpers.add_grid_column(array_states_of_nature[i].label, array_states_of_nature[i].label, new DataGridViewTextBoxCell(), dgrdv_confusion_matrix);
-            }
-            for (int i = 0; i < number_of_states_of_nature; i++)
-            {
-                dgrdv_confusion_matrix.Rows.Add(array_states_of_nature[i].label);
-            }
-            for (int i = 0; i < number_of_states_of_nature; i++)
-            {
-                for (int j = 0; j < number_of_states_of_nature; j++)
+                for (int j = 0; j < 2; j++)
                 {
                     dgrdv_confusion_matrix.Rows[i].Cells[j + 1].Value = confusion_matrix[i, j];
                 }

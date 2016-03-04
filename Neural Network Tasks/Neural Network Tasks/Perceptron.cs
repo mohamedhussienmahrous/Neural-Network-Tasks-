@@ -14,55 +14,64 @@ namespace Neural_Network_Tasks
         int C1, C2, F1, F2, Epoch;
         double lamda;
 
-        public Perceptron(Generic_State_Of_Nature[] C, double B, double[] W, int c1, int c2, int Feature1, int Feature2, double lmada)
+        public Perceptron(Generic_State_Of_Nature[] C, double B, int c1, int c2, int Feature1, int Feature2, int E,double lamda)
         {
+            Epoch = E;
             F1 = Feature1;
             F2 = Feature2;
             Classes = C;
             Bias = B;
-            Weights = W;
             C1 = c1;
             C2 = c2;
-            Weights = new double[2];
-            this.lamda = lmada;
+            Weights = new double[2]{0,0};
+            this.lamda = lamda;
 
         }
-        public void Training()
+        public void Training( )
         {
             for (int Ep = 0; Ep < Epoch; ++Ep)
             {
-                for (int num = 0; num < Classes.Length; num++)
-                    for (int i = 0; i < Classes[0].num_of_training_samples; ++i)
-                    {
-                        double V = new Adder().ApplySpeacialAdder(Bias, Weights[0], Weights[1], Classes[num].training_samples[i].features_values[F1, 0], Classes[num].training_samples[i].features_values[F2, 0]);
-                        double Y = new ActivationFunctions().sign(V, C1, C2);
-                        int d = 0;
-                        if (d == Y)
-                            d = 1;
-                        else d = -1;
 
-                        Weights[0] = Weights[0] + lamda * (d - Y) * Classes[num].training_samples[i].features_values[F1, 0];
-                        Weights[1] = Weights[1] + lamda * (d - Y) * Classes[num].training_samples[i].features_values[F2, 0];
+                for (int i = 0; i < Classes[0].num_of_training_samples; ++i)
+                {
+                    double V = new Adder().ApplySpeacialAdder(Bias, Weights[0], Weights[1], Classes[C1].training_samples[i].features_values[F1, 0], Classes[C1].training_samples[i].features_values[F2, 0]);
+                    double Y = new ActivationFunctions().sign(V, C1, C2);
+                    int d = 0;
+                    if (d == Y)
+                        d = 1;
+                    else d = -1;
+
+                    Weights[0] = Weights[0] + lamda * (d - Y) * Classes[C1].training_samples[i].features_values[F1, 0];
+                    Weights[1] = Weights[1] + lamda * (d - Y) * Classes[C1].training_samples[i].features_values[F2, 0];
 
 
-                    }
+                }
+
+                for (int i = 0; i < Classes[0].num_of_training_samples; ++i)
+                {
+                    double V = new Adder().ApplySpeacialAdder(Bias, Weights[0], Weights[1], Classes[C2].training_samples[i].features_values[F1, 0], Classes[C2].training_samples[i].features_values[F2, 0]);
+                    double Y = new ActivationFunctions().sign(V, C1, C2);
+                    int d = 0;
+                    if (d == Y)
+                        d = 1;
+                    else d = -1;
+
+                    Weights[0] = Weights[0] + lamda * (d - Y) * Classes[C2].training_samples[i].features_values[F1, 0];
+                    Weights[1] = Weights[1] + lamda * (d - Y) * Classes[C2].training_samples[i].features_values[F2, 0];
+
+
+                }
+
+
             }
-
         }
-        private void initializeWeights()
-        {
-            for (int i = 0; i < Weights.Length; ++i)
-                Weights[i] = 0;
-        }
+    
 
-        public bool testing(int classindex, Sample s, int F1, int F2)
+        public int testing( Sample s, int F1, int F2)
         {
             double V = new Adder().ApplySpeacialAdder(Bias, Weights[0], Weights[1], s.features_values[F1, 0], s.features_values[F2, 0]);
-            double Y = new ActivationFunctions().sign(V, C1, C2);
-            int d = 0;
-            if (d == Y)
-                return true;
-            return false;
+            int  Y = new ActivationFunctions().sign(V, C1, C2);
+            return Y;
         }
     }
 }

@@ -21,6 +21,9 @@ namespace Neural_Network_Tasks
            }
             return Cht;
         }
-
+        static public Chart DrawSample(Chart Cht, Sample X, int F1, int F2, string str)
+        {     Cht.Series[str].Points.AddXY(X.features_values[F1, 0], X.features_values[F2, 0]);    
+            return Cht;
+        }
     }
 }
