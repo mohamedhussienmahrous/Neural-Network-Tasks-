@@ -25,5 +25,17 @@ namespace Neural_Network_Tasks
         {     Cht.Series[str].Points.AddXY(X.features_values[F1, 0], X.features_values[F2, 0]);    
             return Cht;
         }
+        static public void drawline(string str,ref Chart C,double Bias,double [] W)
+        {
+
+            double x1, y1=0, x2=0, y2;
+            x1 = (-Bias) / W[0];
+            y2 = (-Bias) / W[1];
+            C.Series[str].Points.AddXY(x1, y1);
+            C.Series[str].Points.AddXY(x2, y2);
+
+
+           
+        }
     }
 }

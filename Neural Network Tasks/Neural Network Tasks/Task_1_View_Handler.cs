@@ -89,7 +89,7 @@ namespace Neural_Network_Tasks
                     for (int j = 0; j < number_of_test_samples_per_state_of_nature; j++)
                     {
                         int class_index = a.testing(array_states_of_nature[class2].test_samples[j], F1, F2);
-                        if (class_index == Class1)
+                        if (class_index == class2)
                             confusion_matrix[1, 0]++;
                         else confusion_matrix[1, 1]++;
                         //confusion_matrix[1, class_index]++;
@@ -101,13 +101,21 @@ namespace Neural_Network_Tasks
                     overall_accuracy += confusion_matrix[i, i];
                 }
                 overall_accuracy /= (2 * number_of_test_samples_per_state_of_nature);
+                overall_accuracy *= 100;
+                display_results(confusion_matrix_control, overall_accuracy_control);
+                Graphdrawing.drawline("Line",ref c, a.Bias, a.Weights);
+
+                
+
+
             }
-            display_results(confusion_matrix_control,overall_accuracy_control);
+           
             return wieg;
         }
         public void ApplyDrawing(ref Chart c, int F1, int F2,int C1,int C2)
         {
                 c.Series.Clear();
+                c.Series.Add("Line");
                for (int cl = 0; cl < array_states_of_nature.Length; cl++)
                 {
                     c.Series.Add(array_states_of_nature[cl].label);
@@ -123,9 +131,11 @@ namespace Neural_Network_Tasks
                          c = Graphdrawing.DrawSample(c, array_states_of_nature[C2].training_samples[T], F1, F2, array_states_of_nature[C2].label);
             
                //}
+                     c.Series["Line"].Color = Color.Orange;
                 c.Series[array_states_of_nature[0].label].Color = Color.Green;
                 c.Series[array_states_of_nature[1].label].Color = Color.Red;
                 c.Series[array_states_of_nature[2].label].Color = Color.Blue;
+                c.Series["Line"].ChartType = SeriesChartType.Line;
                 c.Series[array_states_of_nature[0].label].ChartType = SeriesChartType.Point;
                 c.Series[array_states_of_nature[1].label].ChartType = SeriesChartType.Point;
                 c.Series[array_states_of_nature[2].label].ChartType = SeriesChartType.Point;
@@ -139,6 +149,8 @@ namespace Neural_Network_Tasks
 
         public void display_results(DataGridView dgrdv_confusion_matrix, TextBox textbox_overall_accuracy)
         {
+            dgrdv_confusion_matrix.Rows.Clear();
+            dgrdv_confusion_matrix.Columns.Clear();
             textbox_overall_accuracy.Text = overall_accuracy.ToString();
             DataGridView_Helpers object_data_grid_view_helpers = new DataGridView_Helpers();
             object_data_grid_view_helpers.add_grid_column("actions", "/", new DataGridViewTextBoxCell(), dgrdv_confusion_matrix);

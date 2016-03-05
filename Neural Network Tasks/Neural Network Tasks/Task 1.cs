@@ -32,7 +32,7 @@ namespace Neural_Network_Tasks
         private void button2_Click(object sender, EventArgs e)
         {
            
-           double[] wieg= object_view_handler.Apply(ref chart1, comboBox1.SelectedIndex, comboBox2.SelectedIndex,comboBox3.SelectedIndex,comboBox4.SelectedIndex,textBox2,textBox1);
+           double[] wieg= object_view_handler.Apply(ref chart1, comboBox1.SelectedIndex, comboBox2.SelectedIndex,comboBox4.SelectedIndex,comboBox3.SelectedIndex,textBox2,textBox1);
            label5.Text ="the first weigth = " +wieg[0].ToString();
            label6.Text = "the second weigth = " + wieg[1].ToString();
 

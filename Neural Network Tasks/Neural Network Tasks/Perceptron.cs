@@ -8,8 +8,8 @@ namespace Neural_Network_Tasks
 {
     class Perceptron
     {
-        double[] Weights;
-        double Bias;
+       public  double[] Weights;
+       public double Bias;
         Generic_State_Of_Nature[] Classes;
         int C1, C2, F1, F2, Epoch;
         double lamda;
