@@ -27,12 +27,14 @@ namespace Neural_Network_Tasks
         }
         static public void drawline(string str,ref Chart C,double Bias,double [] W)
         {
+            //double x = C.ChartAreas[1].AxisY.Maximum;
+            //double min = C.ChartAreas[1].AxisY.Minimum;
+            //double x1, y1 = 0, x2 = 0, y2;
 
-            double x1, y1=0, x2=0, y2;
-            x1 = (-Bias) / W[0];
-            y2 = (-Bias) / W[1];
-            C.Series[str].Points.AddXY(x1, y1);
-            C.Series[str].Points.AddXY(x2, y2);
+            //x1 = (-Bias) / W[0];
+            //y2 = (Bias) / W[1];
+            //C.Series[str].Points.AddXY(x1, y1);
+            //C.Series[str].Points.AddXY(x2, y2);
 
 
            

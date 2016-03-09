@@ -51,13 +51,14 @@
             this.label4 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
+            this.comboBox5 = new System.Windows.Forms.ComboBox();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView_confusion_matrix)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.chart1)).BeginInit();
             this.SuspendLayout();
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(339, 24);
+            this.button1.Location = new System.Drawing.Point(220, 25);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(140, 23);
             this.button1.TabIndex = 0;
@@ -68,7 +69,7 @@
             // label_overall_accuracy
             // 
             this.label_overall_accuracy.AutoSize = true;
-            this.label_overall_accuracy.Location = new System.Drawing.Point(114, 443);
+            this.label_overall_accuracy.Location = new System.Drawing.Point(37, 466);
             this.label_overall_accuracy.Name = "label_overall_accuracy";
             this.label_overall_accuracy.Size = new System.Drawing.Size(88, 13);
             this.label_overall_accuracy.TabIndex = 9;
@@ -77,7 +78,7 @@
             // label_confusion_matrix
             // 
             this.label_confusion_matrix.AutoSize = true;
-            this.label_confusion_matrix.Location = new System.Drawing.Point(117, 184);
+            this.label_confusion_matrix.Location = new System.Drawing.Point(40, 184);
             this.label_confusion_matrix.Name = "label_confusion_matrix";
             this.label_confusion_matrix.Size = new System.Drawing.Size(85, 13);
             this.label_confusion_matrix.TabIndex = 8;
@@ -86,21 +87,21 @@
             // dataGridView_confusion_matrix
             // 
             this.dataGridView_confusion_matrix.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView_confusion_matrix.Location = new System.Drawing.Point(117, 200);
+            this.dataGridView_confusion_matrix.Location = new System.Drawing.Point(33, 206);
             this.dataGridView_confusion_matrix.Name = "dataGridView_confusion_matrix";
             this.dataGridView_confusion_matrix.Size = new System.Drawing.Size(481, 234);
             this.dataGridView_confusion_matrix.TabIndex = 7;
             // 
             // textBox_overall_accuracy
             // 
-            this.textBox_overall_accuracy.Location = new System.Drawing.Point(220, 440);
+            this.textBox_overall_accuracy.Location = new System.Drawing.Point(168, 466);
             this.textBox_overall_accuracy.Name = "textBox_overall_accuracy";
             this.textBox_overall_accuracy.Size = new System.Drawing.Size(378, 20);
             this.textBox_overall_accuracy.TabIndex = 5;
             // 
             // textBox_file_path
             // 
-            this.textBox_file_path.Location = new System.Drawing.Point(117, 27);
+            this.textBox_file_path.Location = new System.Drawing.Point(33, 27);
             this.textBox_file_path.Name = "textBox_file_path";
             this.textBox_file_path.Size = new System.Drawing.Size(169, 20);
             this.textBox_file_path.TabIndex = 6;
@@ -145,7 +146,7 @@
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.4F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(126, 101);
+            this.label2.Location = new System.Drawing.Point(40, 98);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(184, 17);
             this.label2.TabIndex = 14;
@@ -153,7 +154,7 @@
             // 
             // textBox1
             // 
-            this.textBox1.Location = new System.Drawing.Point(339, 98);
+            this.textBox1.Location = new System.Drawing.Point(248, 101);
             this.textBox1.Name = "textBox1";
             this.textBox1.Size = new System.Drawing.Size(140, 20);
             this.textBox1.TabIndex = 15;
@@ -203,7 +204,7 @@
             // 
             // textBox2
             // 
-            this.textBox2.Location = new System.Drawing.Point(339, 141);
+            this.textBox2.Location = new System.Drawing.Point(183, 141);
             this.textBox2.Name = "textBox2";
             this.textBox2.Size = new System.Drawing.Size(140, 20);
             this.textBox2.TabIndex = 21;
@@ -212,7 +213,7 @@
             // 
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.4F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label4.Location = new System.Drawing.Point(126, 144);
+            this.label4.Location = new System.Drawing.Point(40, 140);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(98, 17);
             this.label4.TabIndex = 20;
@@ -239,11 +240,20 @@
             this.label6.TabIndex = 23;
             this.label6.Text = "Write The Number of Epoch";
             // 
+            // comboBox5
+            // 
+            this.comboBox5.FormattingEnabled = true;
+            this.comboBox5.Location = new System.Drawing.Point(448, 26);
+            this.comboBox5.Name = "comboBox5";
+            this.comboBox5.Size = new System.Drawing.Size(121, 21);
+            this.comboBox5.TabIndex = 24;
+            // 
             // Task_1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1091, 491);
+            this.ClientSize = new System.Drawing.Size(1100, 491);
+            this.Controls.Add(this.comboBox5);
             this.Controls.Add(this.label6);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.textBox2);
@@ -295,5 +305,6 @@
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.ComboBox comboBox5;
     }
 }
