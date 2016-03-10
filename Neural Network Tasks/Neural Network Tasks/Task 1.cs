@@ -68,5 +68,10 @@ namespace Neural_Network_Tasks
         {
 
         }
+
+        private void Task_1_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }

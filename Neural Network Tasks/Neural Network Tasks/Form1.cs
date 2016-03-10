@@ -26,5 +26,10 @@ namespace Neural_Network_Tasks
         {
             Application.Exit();
         }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            new Task_2().Show();      
+        }
     }
 }
