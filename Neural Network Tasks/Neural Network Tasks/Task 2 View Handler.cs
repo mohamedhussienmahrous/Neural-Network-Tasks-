@@ -5,7 +5,6 @@ using System.Text;
 using System.Windows;
 using System.Windows.Forms;
 using System.IO;
-using System.Windows.Forms;
 using System.Windows.Forms.DataVisualization.Charting;
 using System.Drawing;
 
@@ -29,6 +28,8 @@ namespace Neural_Network_Tasks
         DataGridView confusion_matrix_control;
         TextBox overall_accuracy_control;
         Perceptron a;
+        Least_Mean_Squarecs x;
+        Linear_Perceptron l;
         public void handle_load_data_set_button_click(ComboBox Cbx3, ComboBox Cbx4,ComboBox Cbx1, ComboBox Cbx2,
             Form parent_form,
             TextBox file_path_text_box,
@@ -62,6 +63,57 @@ namespace Neural_Network_Tasks
             }
                 MessageBox.Show("File Loaded!");
         }
+
+        public double[] Applylinear(ref Chart c, int F1, int F2, int Class1, int class2, TextBox lamda, TextBox Epoch)
+        {
+            double[] wieg = null;
+            C1 = Class1;
+            C2 = class2;
+            if (F1 == F2 || Class1 == class2)
+            {
+                MessageBox.Show("You Must Choose Different Features Or Classes!!!!!!");
+            }
+            else
+            {
+                ApplyDrawing(ref c, F1, F2, Class1, class2);
+                l = new Perceptron(array_states_of_nature, 1, Class1, class2, F1, F2, int.Parse(Epoch.Text.ToString()), double.Parse(lamda.Text.ToString()));
+                wieg = a.Training();
+                confusion_matrix = new int[2, 2];
+
+                for (int j = 0; j < number_of_test_samples_per_state_of_nature; j++)
+                {
+                    int class_index = a.testing(array_states_of_nature[Class1].test_samples[j], F1, F2);
+                    if (class_index == Class1)
+                        confusion_matrix[0, 0]++;
+                    else confusion_matrix[0, 1]++;
+                }
+                for (int j = 0; j < number_of_test_samples_per_state_of_nature; j++)
+                {
+                    int class_index = a.testing(array_states_of_nature[class2].test_samples[j], F1, F2);
+                    if (class_index == class2)
+                        confusion_matrix[1, 0]++;
+                    else confusion_matrix[1, 1]++;
+                    //confusion_matrix[1, class_index]++;
+                    //confusion_matrix[i, i]++;
+                }
+                overall_accuracy = 0;
+                for (int i = 0; i < 2; i++)
+                {
+                    overall_accuracy += confusion_matrix[i, i];
+                }
+                overall_accuracy /= (2 * number_of_test_samples_per_state_of_nature);
+                overall_accuracy *= 100;
+                display_results(confusion_matrix_control, overall_accuracy_control);
+                Graphdrawing.drawline("Line", ref c, a.Bias, a.Weights);
+
+
+
+
+            }
+
+            return wieg;
+        }
+
         public double[] ApplyLMS(ref Chart c, int F1, int F2, int Class1, int class2, TextBox lamda, TextBox Epoch)
         {
             double[] wieg = null;
@@ -74,7 +126,7 @@ namespace Neural_Network_Tasks
             else
             {
                 ApplyDrawing(ref c, F1, F2, Class1, class2);
-                a = new Perceptron(array_states_of_nature, 1, Class1, class2, F1, F2, int.Parse(Epoch.Text.ToString()), double.Parse(lamda.Text.ToString()));
+                x = new Least_Mean_Squarecs(array_states_of_nature, 1, Class1, class2, F1, F2, int.Parse(Epoch.Text.ToString()), double.Parse(lamda.Text.ToString()));
                 wieg = a.Training();
                 confusion_matrix = new int[2, 2];
 
