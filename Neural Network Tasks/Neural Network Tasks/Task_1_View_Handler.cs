@@ -63,6 +63,20 @@ namespace Neural_Network_Tasks
                 MessageBox.Show("File Loaded!");
         }
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
         public double[] Apply(ref Chart c, int F1, int F2, int Class1,int class2,TextBox lamda,TextBox Epoch)
         {
             double[] wieg = null;

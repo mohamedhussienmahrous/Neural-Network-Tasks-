@@ -31,7 +31,6 @@ namespace Neural_Network_Tasks
         {
             for (int Ep = 0; Ep < Epoch; ++Ep)
             {
-
                 for (int i = 0; i < Classes[0].num_of_training_samples; ++i)
                 {
                     double V = new Adder().ApplySpeacialAdder(Bias, Weights[0], Weights[1], Classes[C1].training_samples[i].features_values[F1, 0], Classes[C1].training_samples[i].features_values[F2, 0]);

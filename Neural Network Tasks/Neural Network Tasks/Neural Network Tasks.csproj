@@ -60,6 +60,7 @@
     <Compile Include="Generic_State_Of_Nature.cs" />
     <Compile Include="Graphdrawing.cs" />
     <Compile Include="IrisDataset.cs" />
+    <Compile Include="Least Mean Squarecs.cs" />
     <Compile Include="Matrix.cs" />
     <Compile Include="Perceptron.cs" />
     <Compile Include="PerceptronBatch .cs" />

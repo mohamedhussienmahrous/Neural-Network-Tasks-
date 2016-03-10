@@ -36,9 +36,6 @@ namespace Neural_Network_Tasks
             comboBox5.DisplayMember = "Value";
             comboBox5.SelectedIndex = 0;
             comboBox5.Width = 180;
-
-
-
         }
 
         private void button1_Click(object sender, EventArgs e)
