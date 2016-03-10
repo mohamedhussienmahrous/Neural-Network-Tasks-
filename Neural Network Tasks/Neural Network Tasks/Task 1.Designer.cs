@@ -174,7 +174,7 @@
             this.chart1.Size = new System.Drawing.Size(475, 300);
             this.chart1.TabIndex = 16;
             this.chart1.Text = "chart1";
-            this.chart1.Click += new System.EventHandler(this.chart1_Click);
+            
             // 
             // label3
             // 
@@ -276,7 +276,6 @@
             this.Controls.Add(this.button1);
             this.Name = "Task_1";
             this.Text = "Task 1";
-            this.Load += new System.EventHandler(this.Task_1_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView_confusion_matrix)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.chart1)).EndInit();
             this.ResumeLayout(false);
