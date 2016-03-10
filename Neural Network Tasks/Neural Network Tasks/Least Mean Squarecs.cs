@@ -66,7 +66,7 @@ namespace Neural_Network_Tasks
             return Weights;
         }
 
-        public int testing(Sample s, int F1, int F2)
+        public int testing(Sample s, int F1, int F2)// NOT FININSHED YET
         {
             double V = new Adder().ApplySpeacialAdder(Bias, Weights[0], Weights[1], s.features_values[F1, 0], s.features_values[F2, 0]);
             int Y = new ActivationFunctions().sign(V, C1, C2);
