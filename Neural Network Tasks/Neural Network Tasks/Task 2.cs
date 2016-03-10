@@ -1,12 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Forms;
+using System.IO;
+using System.Windows.Forms;
+using System.Windows.Forms.DataVisualization.Charting;
+using System.Drawing;
+using System.ComponentModel;
+
 
 namespace Neural_Network_Tasks
 {
@@ -23,10 +26,7 @@ namespace Neural_Network_Tasks
             employmentStatus.Add(new KeyValuePair<string, string>("0", "[Select Status]"));
             employmentStatus.Add(new KeyValuePair<string, string>("1", "The Perceptron Algorithm"));
             employmentStatus.Add(new KeyValuePair<string, string>("2", "The Batch Perceptron Algorithm"));
-            employmentStatus.Add(new KeyValuePair<string, string>("3", "LMS"));
-
-
-
+            employmentStatus.Add(new KeyValuePair<string, string>("3", "Least Mean Square"));
             employmentStatus.Add(new KeyValuePair<string, string>("4", "Other"));
             comboBox5.DataSource = employmentStatus;
             comboBox5.ValueMember = "Key";
