@@ -21,13 +21,13 @@ namespace Neural_Network_Tasks
             object_view_handler = new Task_2_View_Handler();
             chart1.Series.Clear();
 
-            var employmentStatus = new BindingList<KeyValuePair<string, string>>();
-            employmentStatus.Add(new KeyValuePair<string, string>("0", "[Select Status]"));
-            employmentStatus.Add(new KeyValuePair<string, string>("1", "The Perceptron Algorithm"));
-            employmentStatus.Add(new KeyValuePair<string, string>("2", "The Batch Perceptron Algorithm"));
-            employmentStatus.Add(new KeyValuePair<string, string>("3", "Least Mean Square"));
-            employmentStatus.Add(new KeyValuePair<string, string>("4", "Other"));
-            comboBox5.DataSource = employmentStatus;
+            var Algorithms = new BindingList<KeyValuePair<string, string>>();
+            Algorithms.Add(new KeyValuePair<string, string>("0", "[Select Status]"));
+            Algorithms.Add(new KeyValuePair<string, string>("1", "The Perceptron Algorithm"));
+            Algorithms.Add(new KeyValuePair<string, string>("2", "The Batch Perceptron Algorithm"));
+            Algorithms.Add(new KeyValuePair<string, string>("3", "Least Mean Square"));
+            Algorithms.Add(new KeyValuePair<string, string>("4", "Other"));
+            comboBox5.DataSource = Algorithms;
             comboBox5.ValueMember = "Key";
             comboBox5.DisplayMember = "Value";
             comboBox5.SelectedIndex = 0;
@@ -38,13 +38,13 @@ namespace Neural_Network_Tasks
         private void button2_Click(object sender, EventArgs e)
         {
             double[] wigh = new double[2];
-            if ((int)comboBox5.SelectedValue == 1)
+
+            if (comboBox5.SelectedValue == "1")
                 wigh = object_view_handler.Apply(ref chart1, comboBox1.SelectedIndex, comboBox2.SelectedIndex, comboBox4.SelectedIndex, comboBox3.SelectedIndex, textBox2, textBox1);
 
-            else if ((int)comboBox5.SelectedValue == 3)
+            else if (comboBox5.SelectedValue == "3")
                 wigh = object_view_handler.ApplyLMS(ref chart1, comboBox1.SelectedIndex, comboBox2.SelectedIndex, comboBox4.SelectedIndex, comboBox3.SelectedIndex, textBox2, textBox1);
             // else if ((int)comboBox5.SelectedValue == 3)
-
 
 
             label5.Text = "the first weigth = " + wigh[0].ToString();

@@ -46,12 +46,9 @@ namespace Neural_Network_Tasks
         private void button2_Click(object sender, EventArgs e)
         {
             double[] wigh = new double[2];
-            if ((int)comboBox5.SelectedValue == 1)
+            if (comboBox5.SelectedValue == "1")
                 wigh = object_view_handler.Apply(ref chart1, comboBox1.SelectedIndex, comboBox2.SelectedIndex, comboBox4.SelectedIndex, comboBox3.SelectedIndex, textBox2, textBox1);
-
-            else if ((int)comboBox5.SelectedValue == 2) ;
-            //wigh = object_view_handler.Applybatch(ref chart1, comboBox1.SelectedIndex, comboBox2.SelectedIndex, comboBox4.SelectedIndex, comboBox3.SelectedIndex, textBox2, textBox1);
-            //else if ((int)comboBox5.SelectedValue == 3)              
+          
 
 
             label5.Text = "the first weigth = " + wigh[0].ToString();
