@@ -30,6 +30,7 @@ namespace Neural_Network_Tasks
         }
         public double[] Training()
         {
+            double w = 1 / (RXX(Classes, C1, C2, F1) * lamda) * RDX(Classes, C1, C2, F1);
 
             return Weights;
         }
@@ -39,22 +40,17 @@ namespace Neural_Network_Tasks
         {
             return 0;
         }
-
-
-
-        public double RXX(Generic_State_Of_Nature[] C, int C1, int C2, int classindex, int featureindex)
+        public double RXX(Generic_State_Of_Nature[] C, int C1, int C2, int featureindex)
         {
             double sum = 0;
 
             for (int x = 0; x < C[C1].num_of_training_samples; x++)
                 for (int y = 0; y < C[C2].num_of_training_samples; y++)
-                    sum += C[C1].training_samples[g].features_values[featureindex, 0] * C[C2].training_samples[g].features_values[featureindex, 0];
+                    sum += C[C1].training_samples[x].features_values[featureindex, 0] * C[C2].training_samples[y].features_values[featureindex, 0];
             return -sum;
         }
-
-
-
-        public double RDX(Generic_State_Of_Nature[] C, int C1, int C2, int classindex, int featureindex)
+        
+        public double RDX(Generic_State_Of_Nature[] C, int C1, int C2, int featureindex)
         {
             double sum = 0;
 

@@ -127,19 +127,19 @@ namespace Neural_Network_Tasks
             {
                 ApplyDrawing(ref c, F1, F2, Class1, class2);
                 x = new Least_Mean_Squarecs(array_states_of_nature, 1, Class1, class2, F1, F2, int.Parse(Epoch.Text.ToString()), double.Parse(lamda.Text.ToString()));
-                wieg = a.Training();
+                wieg = x.Training();
                 confusion_matrix = new int[2, 2];
 
                 for (int j = 0; j < number_of_test_samples_per_state_of_nature; j++)
                 {
-                    int class_index = a.testing(array_states_of_nature[Class1].test_samples[j], F1, F2);
+                    int class_index = x.testing(array_states_of_nature[Class1].test_samples[j], F1, F2);
                     if (class_index == Class1)
                         confusion_matrix[0, 0]++;
                     else confusion_matrix[0, 1]++;
                 }
                 for (int j = 0; j < number_of_test_samples_per_state_of_nature; j++)
                 {
-                    int class_index = a.testing(array_states_of_nature[class2].test_samples[j], F1, F2);
+                    int class_index = x.testing(array_states_of_nature[class2].test_samples[j], F1, F2);
                     if (class_index == class2)
                         confusion_matrix[1, 0]++;
                     else confusion_matrix[1, 1]++;
@@ -154,7 +154,7 @@ namespace Neural_Network_Tasks
                 overall_accuracy /= (2 * number_of_test_samples_per_state_of_nature);
                 overall_accuracy *= 100;
                 display_results(confusion_matrix_control, overall_accuracy_control);
-                Graphdrawing.drawline("Line", ref c, a.Bias, a.Weights);
+                Graphdrawing.drawline("Line", ref c, x.Bias, x.Weights);
 
 
 

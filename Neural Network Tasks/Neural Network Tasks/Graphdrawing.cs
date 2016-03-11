@@ -10,7 +10,7 @@ namespace Neural_Network_Tasks
 {
     static class Graphdrawing
     {
-        static public Chart chart;
+        
         static public Chart draw(Chart Cht, Sample[] Y, Sample[] X, int F1, int F2,string str)
         {
             

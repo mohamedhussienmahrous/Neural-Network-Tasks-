@@ -22,8 +22,7 @@ namespace Neural_Network_Tasks
             chart1.Series.Clear();
 
             var Algorithms = new BindingList<KeyValuePair<string, string>>();
-            Algorithms.Add(new KeyValuePair<string, string>("0", "[Select Status]"));
-            Algorithms.Add(new KeyValuePair<string, string>("1", "The Perceptron Algorithm"));
+            Algorithms.Add(new KeyValuePair<string, string>("0", "[Select Algorithm]"));
             Algorithms.Add(new KeyValuePair<string, string>("2", "The Batch Perceptron Algorithm"));
             Algorithms.Add(new KeyValuePair<string, string>("3", "Least Mean Square"));
             Algorithms.Add(new KeyValuePair<string, string>("4", "Other"));
@@ -39,10 +38,10 @@ namespace Neural_Network_Tasks
         {
             double[] wigh = new double[2];
 
-            if (comboBox5.SelectedValue == "1")
+            if (Convert.ToString(comboBox5.SelectedValue) == "1")
                 wigh = object_view_handler.Apply(ref chart1, comboBox1.SelectedIndex, comboBox2.SelectedIndex, comboBox4.SelectedIndex, comboBox3.SelectedIndex, textBox2, textBox1);
 
-            else if (comboBox5.SelectedValue == "3")
+            else if (Convert.ToString(comboBox5.SelectedValue) == "3")
                 wigh = object_view_handler.ApplyLMS(ref chart1, comboBox1.SelectedIndex, comboBox2.SelectedIndex, comboBox4.SelectedIndex, comboBox3.SelectedIndex, textBox2, textBox1);
             // else if ((int)comboBox5.SelectedValue == 3)
 
