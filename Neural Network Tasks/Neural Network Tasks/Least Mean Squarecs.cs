@@ -35,7 +35,6 @@ namespace Neural_Network_Tasks
                 for (int i = 0; i < Classes[0].num_of_training_samples; ++i)
                 {
                     double V = new Adder().ApplySpeacialAdder(Bias, Weights[0], Weights[1], Classes[C1].training_samples[i].features_values[F1, 0], Classes[C1].training_samples[i].features_values[F2, 0]);
-                   
                     int d = C1;
                     if (d == V)
                         d = 1;
@@ -50,9 +49,8 @@ namespace Neural_Network_Tasks
                 for (int i = 0; i < Classes[0].num_of_training_samples; ++i)
                 {
                     double V = new Adder().ApplySpeacialAdder(Bias, Weights[0], Weights[1], Classes[C2].training_samples[i].features_values[F1, 0], Classes[C2].training_samples[i].features_values[F2, 0]);
-                    double Y = new ActivationFunctions().sign(V, C1, C2);
-                   
-                    int d = C2;
+                                      
+                    int d = C1;
                     if (d == V)
                         d = 1;
                     else d = -1;
@@ -66,11 +64,14 @@ namespace Neural_Network_Tasks
             return Weights;
         }
 
-        public int testing(Sample s, int F1, int F2)// NOT FININSHED YET
+        public int testing(Sample s, int F1, int F2)
         {
             double V = new Adder().ApplySpeacialAdder(Bias, Weights[0], Weights[1], s.features_values[F1, 0], s.features_values[F2, 0]);
-            int Y = new ActivationFunctions().sign(V, C1, C2);
-            return Y;
+            int d = C1;
+            if (d == V)
+                d = 1;
+            else d = -1;
+            return d;
         }
     }
 }
