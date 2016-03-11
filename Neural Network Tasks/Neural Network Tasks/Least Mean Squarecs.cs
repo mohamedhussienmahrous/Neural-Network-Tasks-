@@ -42,8 +42,6 @@ namespace Neural_Network_Tasks
                     error = d - V;
                     Weights[0] = Weights[0] + lamda * error * Classes[C1].training_samples[i].features_values[F1, 0];
                     Weights[1] = Weights[1] + lamda * error * Classes[C1].training_samples[i].features_values[F2, 0];
-
-
                 }
 
                 for (int i = 0; i < Classes[0].num_of_training_samples; ++i)

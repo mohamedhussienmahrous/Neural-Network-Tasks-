@@ -8,13 +8,13 @@ namespace Neural_Network_Tasks
 {
     class Perceptron
     {
-       public  double[] Weights;
-       public double Bias;
+        public double[] Weights;
+        public double Bias;
         Generic_State_Of_Nature[] Classes;
         int C1, C2, F1, F2, Epoch;
         double lamda;
 
-        public Perceptron(Generic_State_Of_Nature[] C, double B, int c1, int c2, int Feature1, int Feature2, int E,double lamda)
+        public Perceptron(Generic_State_Of_Nature[] C, double B, int c1, int c2, int Feature1, int Feature2, int E, double lamda)
         {
             Epoch = E;
             F1 = Feature1;
@@ -23,13 +23,13 @@ namespace Neural_Network_Tasks
             Bias = B;
             C1 = c1;
             C2 = c2;
-            Weights = new double[2]{0,0};
+            Weights = new double[2] { 0, 0 };
             this.lamda = lamda;
 
         }
         public double[] Training()
         {
-            double error=0.0;
+            double error = 0.0;
             for (int Ep = 0; Ep < Epoch; ++Ep)
             {
 
@@ -69,12 +69,12 @@ namespace Neural_Network_Tasks
             }
             return Weights;
         }
-    
 
-        public int testing( Sample s, int F1, int F2)
+
+        public int testing(Sample s, int F1, int F2)
         {
             double V = new Adder().ApplySpeacialAdder(Bias, Weights[0], Weights[1], s.features_values[F1, 0], s.features_values[F2, 0]);
-            int  Y = new ActivationFunctions().sign(V, C1, C2);
+            int Y = new ActivationFunctions().sign(V, C1, C2);
             return Y;
         }
     }

@@ -40,5 +40,34 @@ namespace Neural_Network_Tasks
             return 0;
         }
 
+
+
+        public double RXX(Generic_State_Of_Nature[] C, int C1, int C2, int classindex, int featureindex)
+        {
+            double sum = 0;
+
+            for (int x = 0; x < C[C1].num_of_training_samples; x++)
+                for (int y = 0; y < C[C2].num_of_training_samples; y++)
+                    sum += C[C1].training_samples[g].features_values[featureindex, 0] * C[C2].training_samples[g].features_values[featureindex, 0];
+            return -sum;
+        }
+
+
+
+        public double RDX(Generic_State_Of_Nature[] C, int C1, int C2, int classindex, int featureindex)
+        {
+            double sum = 0;
+
+            for (int g = 0; g < C[C1].num_of_training_samples; g++)
+            {
+                sum += C[C1].training_samples[g].features_values[featureindex, 0] * 1;
+            }
+            for (int g = 0; g < C[C2].num_of_training_samples; g++)
+            {
+                sum += C[C1].training_samples[g].features_values[featureindex, 0] * -1;
+            }
+            return -sum;
+        }
+
     }
 }
