@@ -20,7 +20,7 @@ namespace Neural_Network_Tasks
         private void button1_Click(object sender, EventArgs e)
         {
             new Task_1().Show();
-            this.Hide();
+            //this.Hide();
         }
 
         private void button5_Click(object sender, EventArgs e)

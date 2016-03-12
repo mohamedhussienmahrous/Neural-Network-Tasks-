@@ -40,8 +40,7 @@ namespace Neural_Network_Tasks
         public int testing(Sample s, int F1, int F2)
         {
             double V = new Adder().ApplySpeacialAdder(Bias, Weights[0], Weights[1], s.features_values[F1, 0], s.features_values[F2, 0]);
-            d = C1;
-            if (d == V)
+            if (V >= 0)
                 d = 1;
             else d = -1;
 

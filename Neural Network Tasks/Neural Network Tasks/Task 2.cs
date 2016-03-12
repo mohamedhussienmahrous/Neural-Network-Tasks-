@@ -38,19 +38,24 @@ namespace Neural_Network_Tasks
         private void button2_Click(object sender, EventArgs e)
         {
             double[] wigh = new double[2];
-
+            double f = 0;
             if (Convert.ToString(comboBox5.SelectedValue) == "1")
                 wigh = object_view_handler.Apply(ref chart1, comboBox1.SelectedIndex, comboBox2.SelectedIndex, comboBox4.SelectedIndex, comboBox3.SelectedIndex, textBox2, textBox1);
 
             else if (Convert.ToString(comboBox5.SelectedValue) == "3")
             {
-                wigh = object_view_handler.ApplyLMS(ref chart1, comboBox1.SelectedIndex, comboBox2.SelectedIndex, comboBox4.SelectedIndex, comboBox3.SelectedIndex, textBox2, textBox1,textBox3);
+                f = object_view_handler.ApplyLMS(ref chart1, comboBox1.SelectedIndex, comboBox2.SelectedIndex, comboBox4.SelectedIndex, comboBox3.SelectedIndex, textBox2, textBox1, textBox3);
                 textBox3.Visible = true;
+                label5.Text = Convert.ToString(f);
+            }
+            if(Convert.ToString(comboBox5.SelectedValue) == "4")
+            {
+                object_view_handler.Applylinear(ref chart1, comboBox1.SelectedIndex, comboBox2.SelectedIndex, comboBox4.SelectedIndex, comboBox3.SelectedIndex, textBox2, textBox1);
+
             }
 
-
-            label5.Text = "the first weigth = " + wigh[0].ToString();
-            label6.Text = "the second weigth = " + wigh[1].ToString();
+           // label5.Text = Convert.ToString(f);
+            //label6.Text = "the second weigth = " + wigh[1].ToString();
 
         }
 
