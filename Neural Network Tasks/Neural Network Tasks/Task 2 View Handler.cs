@@ -116,6 +116,7 @@ namespace Neural_Network_Tasks
 
         public double ApplyLMS(ref Chart c, int F1, int F2, int Class1, int class2, TextBox lamda, TextBox Epoch, TextBox MSE)
         {
+            double class_index;
             double[] wieg = null;
             C1 = Class1;
             C2 = class2;
@@ -132,7 +133,7 @@ namespace Neural_Network_Tasks
 
                 for (int j = 0; j < number_of_test_samples_per_state_of_nature; j++)
                 {
-                    double class_index = x.testing(array_states_of_nature[Class1].test_samples[j], F1, F2);
+                    class_index = x.testing(array_states_of_nature[Class1].test_samples[j], F1, F2);
 
                     if (class_index >= 0.0)
                         confusion_matrix[0, 0]++;
@@ -140,7 +141,7 @@ namespace Neural_Network_Tasks
                 }
                 for (int j = 0; j < number_of_test_samples_per_state_of_nature; j++)
                 {
-                    double class_index = x.testing(array_states_of_nature[class2].test_samples[j], F1, F2);
+                    class_index = x.testing(array_states_of_nature[class2].test_samples[j], F1, F2);
                     if (class_index < 0.0)
                         confusion_matrix[1, 1]++;
                     else confusion_matrix[1, 0]++;
