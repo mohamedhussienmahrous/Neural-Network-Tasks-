@@ -14,7 +14,7 @@ namespace Neural_Network_Tasks
         int C1, C2, F1, F2, Epoch;
         double lamda;
         int d;
-        double sum;
+        double sum, V;
 
         public Linear_Perceptron(Generic_State_Of_Nature[] C, double B, int c1, int c2, int Feature1, int Feature2, int E, double lamda)
         {
@@ -37,14 +37,10 @@ namespace Neural_Network_Tasks
         }
 
 
-        public int testing(Sample s, int F1, int F2)
+        public double testing(Sample s, int F1, int F2)
         {
-            double V = new Adder().ApplySpeacialAdder(Bias, Weights[0], Weights[1], s.features_values[F1, 0], s.features_values[F2, 0]);
-            if (V >= 0)
-                d = 1;
-            else d = -1;
-
-            return d;
+            V = new Adder().ApplySpeacialAdder(Bias, Weights[0], Weights[1], s.features_values[F1, 0], s.features_values[F2, 0]);
+            return V;
         }
         public double RXX(Generic_State_Of_Nature[] C, int C1, int C2, int featureindex)
         {
