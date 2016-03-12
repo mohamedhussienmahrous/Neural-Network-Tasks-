@@ -15,10 +15,10 @@ namespace Neural_Network_Tasks
         double lamda;
         double MSE;
         public double returnMSE;
-        double V;
+        double V, d;
         public Least_Mean_Squarecs(Generic_State_Of_Nature[] C, double B, int c1, int c2, int Feature1, int Feature2, int E, double lamda, double MSE)
         {
-            
+
             Epoch = E;
             F1 = Feature1;
             F2 = Feature2;
@@ -40,10 +40,7 @@ namespace Neural_Network_Tasks
                 for (int i = 0; i < Classes[0].num_of_training_samples; ++i)
                 {
                     V = new Adder().ApplySpeacialAdder(Bias, Weights[0], Weights[1], Classes[C1].training_samples[i].features_values[F1, 0], Classes[C1].training_samples[i].features_values[F2, 0]);
-                    double d = 1;
-                    //if (d == V)
-                    //    d = 1;
-                    //else d = -1;
+                    d = 1;
                     error = d - V;
                     totalerror += error;
                     Weights[0] = Weights[0] + lamda * error * Classes[C1].training_samples[i].features_values[F1, 0];
@@ -54,10 +51,7 @@ namespace Neural_Network_Tasks
                 {
                     V = new Adder().ApplySpeacialAdder(Bias, Weights[0], Weights[1], Classes[C2].training_samples[i].features_values[F1, 0], Classes[C2].training_samples[i].features_values[F2, 0]);
 
-                    double d = -1;
-                    //if (d == V)
-                    //    d = 1;
-                    //else d = -1;
+                    d = -1;
                     error = d - V;
                     totalerror += error;
                     Weights[0] = Weights[0] + lamda * error * Classes[C2].training_samples[i].features_values[F1, 0];
@@ -65,7 +59,7 @@ namespace Neural_Network_Tasks
 
                 }
                 double b = 0.5 * (1 / (Classes[0].num_of_training_samples * 2.0)) * (totalerror * totalerror);
-                if (MSE <= 0.5 * (1 / (Classes[0].num_of_training_samples * 2.0)) * (totalerror * totalerror))
+                if (0.5 * (1 / (Classes[0].num_of_training_samples * 2.0)) * (totalerror * totalerror) < MSE)
                 {
                     returnMSE = (1 / (Classes[0].num_of_training_samples * 2.0)) * (totalerror * totalerror);
                     break;
@@ -77,11 +71,6 @@ namespace Neural_Network_Tasks
         public double testing(Sample s, int F1, int F2)
         {
             double V = new Adder().ApplySpeacialAdder(Bias, Weights[0], Weights[1], s.features_values[F1, 0], s.features_values[F2, 0]);
-
-            //int d = 0;
-            //if (V >= 0)
-            //    d = 1;
-            //else d = -1;
             return V;
         }
     }

@@ -144,7 +144,7 @@ namespace Neural_Network_Tasks
                 for (int j = 0; j < number_of_test_samples_per_state_of_nature; j++)
                 {
                     double class_index = x.testing(array_states_of_nature[class2].test_samples[j], F1, F2);
-                    if (class_index <0.0)
+                    if (class_index<0.0)
                         confusion_matrix[1, 1]++;
                     else confusion_matrix[1, 0]++;
                     
