@@ -31,8 +31,8 @@ namespace Neural_Network_Tasks
         }
         public double[] Training()
         {
-            Weights[0] = 1 / (RXX(Classes, C1, C2, F1) * lamda) * RDX(Classes, C1, C2, F1);
-            Weights[1] = 1 / (RXX(Classes, C1, C2, F2) * lamda) * RDX(Classes, C1, C2, F2);
+            Weights[0] = (1 / (RXX(Classes, C1, C2, F1) * lamda)) * RDX(Classes, C1, C2, F1);
+            Weights[1] = (1 / (RXX(Classes, C1, C2, F2) * lamda)) * RDX(Classes, C1, C2, F2);
             return Weights;
         }
 
@@ -60,7 +60,7 @@ namespace Neural_Network_Tasks
             }
             for (int g = 0; g < C[C2].num_of_training_samples; g++)
             {
-                sum += C[C1].training_samples[g].features_values[featureindex, 0] * -1;
+                sum += C[C2].training_samples[g].features_values[featureindex, 0] * -1;
             }
             return -sum;
         }

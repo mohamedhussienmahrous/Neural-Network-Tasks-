@@ -26,7 +26,7 @@ namespace Neural_Network_Tasks
             Algorithms.Add(new KeyValuePair<string, string>("0", "[Select Algorithm]"));
             Algorithms.Add(new KeyValuePair<string, string>("2", "The Batch Perceptron Algorithm"));
             Algorithms.Add(new KeyValuePair<string, string>("3", "Least Mean Square"));
-            Algorithms.Add(new KeyValuePair<string, string>("4", "linear regression"));
+            Algorithms.Add(new KeyValuePair<string, string>("4", "Linear Regression"));
             comboBox5.DataSource = Algorithms;
             comboBox5.ValueMember = "Key";
             comboBox5.DisplayMember = "Value";
