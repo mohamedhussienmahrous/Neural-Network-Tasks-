@@ -114,7 +114,7 @@ namespace Neural_Network_Tasks
             return wieg;
         }
 
-        public double[] ApplyLMS(ref Chart c, int F1, int F2, int Class1, int class2, TextBox lamda, TextBox Epoch)
+        public double[] ApplyLMS(ref Chart c, int F1, int F2, int Class1, int class2, TextBox lamda, TextBox Epoch,TextBox MSE)
         {
             double[] wieg = null;
             C1 = Class1;
@@ -126,7 +126,7 @@ namespace Neural_Network_Tasks
             else
             {
                 ApplyDrawing(ref c, F1, F2, Class1, class2);
-                x = new Least_Mean_Squarecs(array_states_of_nature, 1, Class1, class2, F1, F2, int.Parse(Epoch.Text.ToString()), double.Parse(lamda.Text.ToString()));
+                x = new Least_Mean_Squarecs(array_states_of_nature, 1, Class1, class2, F1, F2, int.Parse(Epoch.Text.ToString()), double.Parse(lamda.Text.ToString()),double.Parse(MSE.Text.ToString()));
                 wieg = x.Training();
                 confusion_matrix = new int[2, 2];
 

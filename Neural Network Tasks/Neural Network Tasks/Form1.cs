@@ -19,7 +19,8 @@ namespace Neural_Network_Tasks
 
         private void button1_Click(object sender, EventArgs e)
         {
-             new Task_1().Show();      
+            new Task_1().Show();
+            this.Hide();
         }
 
         private void button5_Click(object sender, EventArgs e)
@@ -29,7 +30,8 @@ namespace Neural_Network_Tasks
 
         private void button2_Click(object sender, EventArgs e)
         {
-            new Task_2().Show();      
+
+            new Task_2().Show();
         }
     }
 }

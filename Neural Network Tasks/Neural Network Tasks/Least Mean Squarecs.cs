@@ -13,8 +13,9 @@ namespace Neural_Network_Tasks
         Generic_State_Of_Nature[] Classes;
         int C1, C2, F1, F2, Epoch;
         double lamda;
+        double MSE;
 
-        public Least_Mean_Squarecs(Generic_State_Of_Nature[] C, double B, int c1, int c2, int Feature1, int Feature2, int E, double lamda)
+        public Least_Mean_Squarecs(Generic_State_Of_Nature[] C, double B, int c1, int c2, int Feature1, int Feature2, int E, double lamda, double MSE)
         {
             Epoch = E;
             F1 = Feature1;
@@ -25,11 +26,13 @@ namespace Neural_Network_Tasks
             C2 = c2;
             Weights = new double[2] { 0, 0 };
             this.lamda = lamda;
+            this.MSE = MSE;
 
         }
         public double[] Training()
         {
             double error = 0;
+            double totalerror = 0;
             for (int Ep = 0; Ep < Epoch; ++Ep)
             {
                 for (int i = 0; i < Classes[0].num_of_training_samples; ++i)
@@ -40,6 +43,8 @@ namespace Neural_Network_Tasks
                         d = 1;
                     else d = -1;
                     error = d - V;
+                    totalerror += error;
+
                     Weights[0] = Weights[0] + lamda * error * Classes[C1].training_samples[i].features_values[F1, 0];
                     Weights[1] = Weights[1] + lamda * error * Classes[C1].training_samples[i].features_values[F2, 0];
                 }
@@ -47,16 +52,21 @@ namespace Neural_Network_Tasks
                 for (int i = 0; i < Classes[0].num_of_training_samples; ++i)
                 {
                     double V = new Adder().ApplySpeacialAdder(Bias, Weights[0], Weights[1], Classes[C2].training_samples[i].features_values[F1, 0], Classes[C2].training_samples[i].features_values[F2, 0]);
-                                      
+
                     int d = C1;
                     if (d == V)
                         d = 1;
                     else d = -1;
                     error = d - V;
-
+                    totalerror += error;
                     Weights[0] = Weights[0] + lamda * error * Classes[C2].training_samples[i].features_values[F1, 0];
                     Weights[1] = Weights[1] + lamda * error * Classes[C2].training_samples[i].features_values[F2, 0];
 
+                }
+
+                if (MSE <= (1 / (Classes[0].num_of_training_samples * 2)) * (totalerror * totalerror))
+                {
+                    break;
                 }
             }
             return Weights;
