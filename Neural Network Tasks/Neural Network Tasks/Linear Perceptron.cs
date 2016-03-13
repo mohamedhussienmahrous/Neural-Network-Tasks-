@@ -31,14 +31,13 @@ namespace Neural_Network_Tasks
         }
         public double[] Training()
         {
-           // Matrix RXXmat = RDX(Classes, C1, C2, F1, F2);
+           
             Matrix Idel = Matrix.Multiply(lamda, (Matrix.IdentityMatrix(2, 2)));
             Matrix RXXmat = RXX(Classes, C1, C2, F1, F2);
             Matrix RDXmat = RDX(Classes, C1, C2, F1, F2);
             Matrix result = Matrix.Power((RXXmat + Idel), -1)*RDXmat;
             Weights[0] = result[0, 0];
             Weights[1] = result[1, 0];
-
             return Weights;
         }
 
@@ -50,8 +49,8 @@ namespace Neural_Network_Tasks
         }
         public Matrix RXX(Generic_State_Of_Nature[] C, int C1, int C2, int featureindex1, int featureindex2)
         {
-            Matrix max_x = new Matrix((C[0].num_of_training_samples + C[0].num_of_test_samples), 2);
-            Matrix max_d = new Matrix((C[0].num_of_training_samples + C[0].num_of_test_samples), 1);
+            Matrix max_x = new Matrix((C[C1].num_of_training_samples + C[C2].num_of_training_samples), 2);
+            Matrix max_d = new Matrix((C[C1].num_of_training_samples + C[C2].num_of_training_samples), 1);
 
 
             for (int g = 0; g < C[C1].num_of_training_samples; g++)
@@ -61,10 +60,10 @@ namespace Neural_Network_Tasks
                 max_d[g, 0] = 1;
 
             }
-            for (int g = 0; g < C[C2].num_of_test_samples; g++)
+            for (int g = 0; g < C[C2].num_of_training_samples; g++)
             {
-                max_x[g + C[C1].num_of_training_samples - 1, 0] = C[C1].training_samples[g].features_values[featureindex1, 0];
-                max_x[g + C[C1].num_of_training_samples - 1, 1] = C[C1].training_samples[g].features_values[featureindex2, 0];
+                max_x[g + C[C1].num_of_training_samples - 1, 0] = C[C2].training_samples[g].features_values[featureindex1, 0];
+                max_x[g + C[C1].num_of_training_samples - 1, 1] = C[C2].training_samples[g].features_values[featureindex2, 0];
                 max_d[g + C[C1].num_of_training_samples - 1, 0] = -1;
             }
 
@@ -74,8 +73,8 @@ namespace Neural_Network_Tasks
 
         public Matrix RDX(Generic_State_Of_Nature[] C, int C1, int C2, int featureindex1, int featureindex2)
         {
-            Matrix max_x = new Matrix((C[0].num_of_training_samples + C[0].num_of_test_samples), 2);
-            Matrix max_d = new Matrix((C[0].num_of_training_samples + C[0].num_of_test_samples), 1);
+            Matrix max_x = new Matrix((C[0].num_of_training_samples + C[0].num_of_training_samples), 2);
+            Matrix max_d = new Matrix((C[0].num_of_training_samples + C[0].num_of_training_samples), 1);
 
 
             for (int g = 0; g < C[C1].num_of_training_samples; g++)
@@ -85,11 +84,11 @@ namespace Neural_Network_Tasks
                 max_d[g, 0] = 1;
 
             }
-            for (int g = 0; g < C[C2].num_of_test_samples; g++)
+            for (int g = 0; g < C[C2].num_of_training_samples; g++)
             {
-                max_x[g + C[C1].num_of_training_samples-1, 0] = C[C1].training_samples[g].features_values[featureindex1, 0];
-                max_x[g + C[C1].num_of_training_samples-1, 1] = C[C1].training_samples[g].features_values[featureindex2, 0];
-                max_d[g + C[C1].num_of_training_samples-1, 0] = -1;
+                max_x[g + C[C2].num_of_training_samples-1, 0] = C[C2].training_samples[g].features_values[featureindex1, 0];
+                max_x[g + C[C2].num_of_training_samples-1, 1] = C[C2].training_samples[g].features_values[featureindex2, 0];
+                max_d[g + C[C2].num_of_training_samples-1, 0] = -1;
             }
 
             max_x = Matrix.Transpose(max_x);

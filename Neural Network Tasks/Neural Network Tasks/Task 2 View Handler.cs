@@ -73,7 +73,7 @@ namespace Neural_Network_Tasks
         public double[] Applylinear(ref Chart c, int F1, int F2, int Class1, int class2, TextBox lamda, TextBox Epoch)
         {
 
-            N = new Normalization(array_states_of_nature);
+            N = new Normalization(array_states_of_nature, Class1, class2, F1, F2);
             Generic_State_Of_Nature[] outnorm = N.makeNormalization();
             double class_index;
             double[] wieg = null;
@@ -86,22 +86,20 @@ namespace Neural_Network_Tasks
             else
             {
                 ApplyDrawing(ref c, F1, F2, Class1, class2);
-
-
-                l = new Linear_Perceptron(array_states_of_nature, 1, Class1, class2, F1, F2, int.Parse(Epoch.Text.ToString()), double.Parse(lamda.Text.ToString()));
+                l = new Linear_Perceptron(outnorm, 1, Class1, class2, F1, F2, int.Parse(Epoch.Text.ToString()), double.Parse(lamda.Text.ToString()));
                 wieg = l.Training();
                 confusion_matrix = new int[2, 2];
 
                 for (int j = 0; j < number_of_test_samples_per_state_of_nature; j++)
                 {
-                    class_index = l.testing(array_states_of_nature[Class1].test_samples[j], F1, F2);
+                    class_index = l.testing(outnorm[Class1].test_samples[j], F1, F2);
                     if (class_index >= 0.0)
                         confusion_matrix[0, 0]++;
                     else confusion_matrix[0, 1]++;
                 }
                 for (int j = 0; j < number_of_test_samples_per_state_of_nature; j++)
                 {
-                    class_index = l.testing(array_states_of_nature[class2].test_samples[j], F1, F2);
+                    class_index = l.testing(outnorm[class2].test_samples[j], F1, F2);
                     if (class_index < 0.0)
                         confusion_matrix[1, 1]++;
                     else confusion_matrix[1, 0]++;
@@ -123,8 +121,8 @@ namespace Neural_Network_Tasks
         public double[] ApplyBatch(ref Chart c, int F1, int F2, int Class1, int class2, TextBox lamda, TextBox Epoch)
         {
 
-            N = new Normalization(array_states_of_nature);
-            Generic_State_Of_Nature[] outnorm = N.makeNormalization();
+            //N = new Normalization(array_states_of_nature);
+            //Generic_State_Of_Nature[] outnorm = N.makeNormalization();
             double class_index;
             double[] wieg = null;
             C1 = Class1;
