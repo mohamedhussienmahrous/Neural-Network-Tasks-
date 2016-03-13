@@ -41,7 +41,12 @@ namespace Neural_Network_Tasks
             double f = 0;
             if (Convert.ToString(comboBox5.SelectedValue) == "1")
                 wigh = object_view_handler.Apply(ref chart1, comboBox1.SelectedIndex, comboBox2.SelectedIndex, comboBox4.SelectedIndex, comboBox3.SelectedIndex, textBox2, textBox1);
-
+            else if (Convert.ToString(comboBox5.SelectedValue) == "2")
+            {
+                 wigh=object_view_handler.ApplyBatch(ref chart1, comboBox1.SelectedIndex, comboBox2.SelectedIndex, comboBox4.SelectedIndex, comboBox3.SelectedIndex, textBox2, textBox1);
+                textBox3.Visible = true;
+                label5.Text = Convert.ToString(f);
+            }
             else if (Convert.ToString(comboBox5.SelectedValue) == "3")
             {
                 f = object_view_handler.ApplyLMS(ref chart1, comboBox1.SelectedIndex, comboBox2.SelectedIndex, comboBox4.SelectedIndex, comboBox3.SelectedIndex, textBox2, textBox1, textBox3);
@@ -54,8 +59,7 @@ namespace Neural_Network_Tasks
 
             }
 
-           // label5.Text = Convert.ToString(f);
-            //label6.Text = "the second weigth = " + wigh[1].ToString();
+
 
         }
 

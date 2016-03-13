@@ -334,7 +334,7 @@ namespace Neural_Network_Tasks
                 for (int j = 0; j < size; j++) C[i, j] = A[ya + i, xa + j];
         }
 
-        private static Matrix StrassenMultiply(Matrix A, Matrix B)                // Smart matrix multiplication
+        public static Matrix StrassenMultiply(Matrix A, Matrix B)                // Smart matrix multiplication
         {
             if (A.cols != B.rows) throw new MException("Wrong dimension of matrix!");
 
@@ -504,7 +504,7 @@ namespace Neural_Network_Tasks
                         result[i, j] += m1[i, k] * m2[k, j];
             return result;
         }
-        private static Matrix Multiply(double n, Matrix m)                          // Multiplication by constant n
+        public static Matrix Multiply(double n, Matrix m)                          // Multiplication by constant n
         {
             Matrix r = new Matrix(m.rows, m.cols);
             for (int i = 0; i < m.rows; i++)

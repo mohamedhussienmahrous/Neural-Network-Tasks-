@@ -63,6 +63,7 @@
     <Compile Include="Least Mean Squarecs.cs" />
     <Compile Include="Linear Perceptron.cs" />
     <Compile Include="Matrix.cs" />
+    <Compile Include="Normalization.cs" />
     <Compile Include="Perceptron.cs" />
     <Compile Include="PerceptronBatch .cs" />
     <Compile Include="Program.cs" />

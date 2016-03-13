@@ -15,7 +15,7 @@ namespace Neural_Network_Tasks
         public Generic_State_Of_Nature[] array_states_of_nature;
         int[,] confusion_matrix;
         double overall_accuracy;
-
+        Normalization N;
         const int number_of_features = 4,
             number_of_states_of_nature = 3,
             number_of_samples_per_state_of_nature = 50,
@@ -30,6 +30,8 @@ namespace Neural_Network_Tasks
         Perceptron a;
         Least_Mean_Squarecs x;
         Linear_Perceptron l;
+        PerceptronBatch B;
+
         public void handle_load_data_set_button_click(ComboBox Cbx3, ComboBox Cbx4, ComboBox Cbx1, ComboBox Cbx2,
             Form parent_form,
             TextBox file_path_text_box,
@@ -70,6 +72,9 @@ namespace Neural_Network_Tasks
 
         public double[] Applylinear(ref Chart c, int F1, int F2, int Class1, int class2, TextBox lamda, TextBox Epoch)
         {
+
+            N = new Normalization(array_states_of_nature);
+            Generic_State_Of_Nature[] outnorm = N.makeNormalization();
             double class_index;
             double[] wieg = null;
             C1 = Class1;
@@ -81,6 +86,8 @@ namespace Neural_Network_Tasks
             else
             {
                 ApplyDrawing(ref c, F1, F2, Class1, class2);
+
+
                 l = new Linear_Perceptron(array_states_of_nature, 1, Class1, class2, F1, F2, int.Parse(Epoch.Text.ToString()), double.Parse(lamda.Text.ToString()));
                 wieg = l.Training();
                 confusion_matrix = new int[2, 2];
@@ -98,7 +105,6 @@ namespace Neural_Network_Tasks
                     if (class_index < 0.0)
                         confusion_matrix[1, 1]++;
                     else confusion_matrix[1, 0]++;
-
                 }
                 overall_accuracy = 0;
                 for (int i = 0; i < 2; i++)
@@ -109,6 +115,56 @@ namespace Neural_Network_Tasks
                 overall_accuracy *= 100;
                 display_results(confusion_matrix_control, overall_accuracy_control);
                 Graphdrawing.drawline("Line", ref c, l.Bias, l.Weights);
+            }
+
+            return wieg;
+        }
+
+        public double[] ApplyBatch(ref Chart c, int F1, int F2, int Class1, int class2, TextBox lamda, TextBox Epoch)
+        {
+
+            N = new Normalization(array_states_of_nature);
+            Generic_State_Of_Nature[] outnorm = N.makeNormalization();
+            double class_index;
+            double[] wieg = null;
+            C1 = Class1;
+            C2 = class2;
+            if (F1 == F2 || Class1 == class2)
+            {
+                MessageBox.Show("You Must Choose Different Features Or Classes!!!!!!");
+            }
+            else
+            {
+                ApplyDrawing(ref c, F1, F2, Class1, class2);
+
+
+                B = new PerceptronBatch(array_states_of_nature, 1, Class1, class2, F1, F2, int.Parse(Epoch.Text.ToString()), double.Parse(lamda.Text.ToString()));
+                wieg = B.Training();
+                confusion_matrix = new int[2, 2];
+
+                for (int j = 0; j < number_of_test_samples_per_state_of_nature; j++)
+                {
+                    class_index = B.testing(array_states_of_nature[Class1].test_samples[j], F1, F2);
+                    if (class_index >= 0.0)
+                        confusion_matrix[0, 0]++;
+                    else confusion_matrix[0, 1]++;
+                }
+                for (int j = 0; j < number_of_test_samples_per_state_of_nature; j++)
+                {
+                    class_index = B.testing(array_states_of_nature[class2].test_samples[j], F1, F2);
+                    if (class_index < 0.0)
+                        confusion_matrix[1, 1]++;
+                    else confusion_matrix[1, 0]++;
+                }
+                overall_accuracy = 0;
+                for (int i = 0; i < 2; i++)
+                {
+                    overall_accuracy += confusion_matrix[i, i];
+                }
+                overall_accuracy /= (2 * number_of_test_samples_per_state_of_nature);
+                overall_accuracy *= 100;
+                display_results(confusion_matrix_control, overall_accuracy_control);
+                Graphdrawing.drawline("Line", ref c, B.Bias, B.Weights);
             }
 
             return wieg;

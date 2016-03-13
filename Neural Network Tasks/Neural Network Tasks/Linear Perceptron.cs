@@ -31,8 +31,14 @@ namespace Neural_Network_Tasks
         }
         public double[] Training()
         {
-            Weights[0] = (1 / (RXX(Classes, C1, C2, F1) * lamda)) * RDX(Classes, C1, C2, F1);
-            Weights[1] = (1 / (RXX(Classes, C1, C2, F2) * lamda)) * RDX(Classes, C1, C2, F2);
+           // Matrix RXXmat = RDX(Classes, C1, C2, F1, F2);
+            Matrix Idel = Matrix.Multiply(lamda, (Matrix.IdentityMatrix(2, 2)));
+            Matrix RXXmat = RXX(Classes, C1, C2, F1, F2);
+            Matrix RDXmat = RDX(Classes, C1, C2, F1, F2);
+            Matrix result = Matrix.Power((RXXmat + Idel), -1)*RDXmat;
+            Weights[0] = result[0, 0];
+            Weights[1] = result[1, 0];
+
             return Weights;
         }
 
@@ -42,27 +48,52 @@ namespace Neural_Network_Tasks
             V = new Adder().ApplySpeacialAdder(Bias, Weights[0], Weights[1], s.features_values[F1, 0], s.features_values[F2, 0]);
             return V;
         }
-        public double RXX(Generic_State_Of_Nature[] C, int C1, int C2, int featureindex)
+        public Matrix RXX(Generic_State_Of_Nature[] C, int C1, int C2, int featureindex1, int featureindex2)
         {
-            sum = 0;
-            for (int x = 0; x < C[C1].num_of_training_samples; x++)
-                for (int y = 0; y < C[C2].num_of_training_samples; y++)
-                    sum += C[C1].training_samples[x].features_values[featureindex, 0] * C[C2].training_samples[y].features_values[featureindex, 0];
-            return -sum;
-        }
+            Matrix max_x = new Matrix((C[0].num_of_training_samples + C[0].num_of_test_samples), 2);
+            Matrix max_d = new Matrix((C[0].num_of_training_samples + C[0].num_of_test_samples), 1);
 
-        public double RDX(Generic_State_Of_Nature[] C, int C1, int C2, int featureindex)
-        {
-            sum = 0;
+
             for (int g = 0; g < C[C1].num_of_training_samples; g++)
             {
-                sum += C[C1].training_samples[g].features_values[featureindex, 0] * 1;
+                max_x[g, 0] = C[C1].training_samples[g].features_values[featureindex1, 0];
+                max_x[g, 1] = C[C1].training_samples[g].features_values[featureindex2, 0];
+                max_d[g, 0] = 1;
+
             }
-            for (int g = 0; g < C[C2].num_of_training_samples; g++)
+            for (int g = 0; g < C[C2].num_of_test_samples; g++)
             {
-                sum += C[C2].training_samples[g].features_values[featureindex, 0] * -1;
+                max_x[g + C[C1].num_of_training_samples - 1, 0] = C[C1].training_samples[g].features_values[featureindex1, 0];
+                max_x[g + C[C1].num_of_training_samples - 1, 1] = C[C1].training_samples[g].features_values[featureindex2, 0];
+                max_d[g + C[C1].num_of_training_samples - 1, 0] = -1;
             }
-            return -sum;
+
+            Matrix DD = Matrix.Transpose(max_x);
+            return DD*max_x;
+        }
+
+        public Matrix RDX(Generic_State_Of_Nature[] C, int C1, int C2, int featureindex1, int featureindex2)
+        {
+            Matrix max_x = new Matrix((C[0].num_of_training_samples + C[0].num_of_test_samples), 2);
+            Matrix max_d = new Matrix((C[0].num_of_training_samples + C[0].num_of_test_samples), 1);
+
+
+            for (int g = 0; g < C[C1].num_of_training_samples; g++)
+            {
+                max_x[g, 0] = C[C1].training_samples[g].features_values[featureindex1, 0];
+                max_x[g, 1] = C[C1].training_samples[g].features_values[featureindex2, 0];
+                max_d[g, 0] = 1;
+
+            }
+            for (int g = 0; g < C[C2].num_of_test_samples; g++)
+            {
+                max_x[g + C[C1].num_of_training_samples-1, 0] = C[C1].training_samples[g].features_values[featureindex1, 0];
+                max_x[g + C[C1].num_of_training_samples-1, 1] = C[C1].training_samples[g].features_values[featureindex2, 0];
+                max_d[g + C[C1].num_of_training_samples-1, 0] = -1;
+            }
+
+            max_x = Matrix.Transpose(max_x);
+            return Matrix.StrassenMultiply(max_x, max_d);
         }
 
     }

@@ -13,6 +13,7 @@ namespace Neural_Network_Tasks
         Generic_State_Of_Nature[] Classes;
         int C1, C2, F1, F2, Epoch;
         double lamda;
+        double Totalerror;
 
         public PerceptronBatch(Generic_State_Of_Nature[] C, double B, int c1, int c2, int Feature1, int Feature2, int E, double lamda)
         {
@@ -31,6 +32,7 @@ namespace Neural_Network_Tasks
         {
             for (int Ep = 0; Ep < Epoch; ++Ep)
             {
+                Totalerror = 0;
                 for (int i = 0; i < Classes[0].num_of_training_samples; ++i)
                 {
                     double V = new Adder().ApplySpeacialAdder(Bias, Weights[0], Weights[1], Classes[C1].training_samples[i].features_values[F1, 0], Classes[C1].training_samples[i].features_values[F2, 0]);
@@ -40,9 +42,7 @@ namespace Neural_Network_Tasks
                         d = 1;
                     else d = -1;
 
-                    Weights[0] = Weights[0] + lamda * (d - Y) * Classes[C1].training_samples[i].features_values[F1, 0];
-                    Weights[1] = Weights[1] + lamda * (d - Y) * Classes[C1].training_samples[i].features_values[F2, 0];
-
+                    Totalerror += ((d - Y) * (d - Y)) / 2;
 
                 }
 
@@ -55,11 +55,13 @@ namespace Neural_Network_Tasks
                         d = 1;
                     else d = -1;
 
-                    Weights[0] = Weights[0] + lamda * (d - Y) * Classes[C2].training_samples[i].features_values[F1, 0];
-                    Weights[1] = Weights[1] + lamda * (d - Y) * Classes[C2].training_samples[i].features_values[F2, 0];
-
+                    Totalerror += ((d - Y) * (d - Y)) / 2;
 
                 }
+                Totalerror /= (Classes[C1].num_of_training_samples + Classes[C2].num_of_training_samples);
+
+                Weights[0] = Weights[0] + lamda * (Totalerror);
+                Weights[1] = Weights[1] + lamda * (Totalerror);
 
 
             }
