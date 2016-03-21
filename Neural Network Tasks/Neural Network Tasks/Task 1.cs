@@ -53,5 +53,10 @@ namespace Neural_Network_Tasks
             //label6.Text = "the second weigth = " + wigh[1].ToString();
 
         }
+
+        private void textBox_file_path_TextChanged(object sender, EventArgs e)
+        {
+
+        }
     }
 }

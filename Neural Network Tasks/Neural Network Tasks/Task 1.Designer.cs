@@ -105,6 +105,7 @@
             this.textBox_file_path.Name = "textBox_file_path";
             this.textBox_file_path.Size = new System.Drawing.Size(169, 20);
             this.textBox_file_path.TabIndex = 6;
+            this.textBox_file_path.TextChanged += new System.EventHandler(this.textBox_file_path_TextChanged);
             // 
             // comboBox1
             // 
@@ -174,7 +175,6 @@
             this.chart1.Size = new System.Drawing.Size(475, 300);
             this.chart1.TabIndex = 16;
             this.chart1.Text = "chart1";
-            
             // 
             // label3
             // 

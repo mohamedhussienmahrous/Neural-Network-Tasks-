@@ -148,6 +148,120 @@ namespace Neural_Network_Tasks
                             }
             return afternormailzed;
         }
+        public Generic_State_Of_Nature[] makeNormalizationalldataset()
+        {
+
+            for (int g = 0; g < c.Length; g++)
+            {
+                if (C1 == g || C2 == g)
+                    for (int S = 0; S < c[g].training_samples.Length; S++)
+                    {
+                        if (c[g].training_samples[S].features_values[F1, 0] > max1[0])
+                            max1[0] = c[g].training_samples[S].features_values[F1, 0];
+                        mean[0] += c[g].training_samples[S].features_values[F1, 0];
+                    }
+            }
+
+
+            for (int g = 0; g < c.Length; g++)
+            {
+                if (C1 == g || C2 == g)
+                    for (int S = 0; S < c[g].training_samples.Length; S++)
+                    {
+                        if (c[g].training_samples[S].features_values[F2, 0] > max1[1])
+                            max1[1] = c[g].training_samples[S].features_values[F2, 0];
+                        mean[1] += c[g].training_samples[S].features_values[F2, 0];
+                    }
+            }
+
+
+            for (int g = 0; g < c.Length; g++)
+            {
+                if (C1 == g || C2 == g)
+
+                    for (int S = 0; S < c[g].test_samples.Length; S++)
+                    {
+                        if (c[g].test_samples[S].features_values[F1, 0] > max1[0])
+                            max1[0] = c[g].test_samples[S].features_values[F1, 0];
+                        mean[0] += c[g].test_samples[S].features_values[F1, 0];
+
+                    }
+            }
+
+
+            for (int g = 0; g < c.Length; g++)
+            {
+                if (C1 == g || C2 == g)
+
+                    for (int S = 0; S < c[g].test_samples.Length; S++)
+                    {
+                        if (c[g].test_samples[S].features_values[F2, 0] > max1[1])
+                            max1[1] = c[g].test_samples[S].features_values[F2, 0];
+                        mean[1] += c[g].test_samples[S].features_values[F2, 0];
+
+                    }
+            }
+
+            for (int p = 0; p < 2; p++)
+                mean[p] /= (2 * (c[0].num_of_test_samples + c[0].num_of_training_samples));
+
+
+            for (int g = 0; g < c.Length; g++)
+            {
+                if (C1 == g || C2 == g)
+
+                    for (int S = 0; S < c[g].training_samples.Length; S++)
+                    {
+
+                        afternormailzed[g].training_samples[S].features_values[F1, 0] = (c[g].training_samples[S].features_values[F1, 0] - mean[0]) / max1[0];
+
+
+                    }
+            }
+
+
+            for (int g = 0; g < c.Length; g++)
+            {
+                if (C1 == g || C2 == g)
+
+                    for (int S = 0; S < c[g].training_samples.Length; S++)
+                    {
+
+                        afternormailzed[g].training_samples[S].features_values[F2, 0] = (c[g].training_samples[S].features_values[F2, 0] - mean[1]) / max1[1];
+
+
+                    }
+            }
+
+
+            ////////////////////////
+
+            for (int g = 0; g < c.Length; g++)
+            {
+                if (C1 == g || C2 == g)
+
+                    for (int S = 0; S < c[g].test_samples.Length; S++)
+                    {
+                        afternormailzed[g].test_samples[S].features_values[F1, 0] = (c[g].test_samples[S].features_values[F1, 0] - mean[0]) / max1[0];
+
+                    }
+
+            }
+
+
+            for (int g = 0; g < c.Length; g++)
+            {
+                if (C1 == g || C2 == g)
+
+                    for (int S = 0; S < c[g].test_samples.Length; S++)
+                    {
+                        afternormailzed[g].test_samples[S].features_values[F2, 0] = (c[g].test_samples[S].features_values[F2, 0] - mean[1]) / max1[1];
+
+                    }
+
+            }
+            return afternormailzed;
+        }
         
 
     }
