@@ -87,24 +87,26 @@ namespace Neural_Network_Tasks
             }
             else
             {
+                Normalization N = new Normalization(array_states_of_nature, Class1, class2, F1, F2);
+                Generic_State_Of_Nature[] outnorm = N.makeNormalization();
                 ApplyDrawing(ref c, F1, F2,Class1,class2);
-                a = new Perceptron(array_states_of_nature, 1, Class1, class2, F1, F2, int.Parse(Epoch.Text.ToString()), double.Parse(lamda.Text.ToString()));
+                a = new Perceptron(outnorm, 1, Class1, class2, F1, F2, int.Parse(Epoch.Text.ToString()), double.Parse(lamda.Text.ToString()));
                 wieg = a.Training();
                 confusion_matrix = new int[2, 2];
 
                 for (int j = 0; j < number_of_test_samples_per_state_of_nature; j++)
                 {
-                         int class_index = a.testing(array_states_of_nature[Class1].test_samples[j],F1,F2);
-                        if(class_index==Class1)
+                    int class_index = a.testing(outnorm[Class1].test_samples[j], F1, F2);
+                    if (class_index >= 0.0)
                         confusion_matrix[0, 0]++;
-                        else   confusion_matrix[0, 1]++;
+                    else confusion_matrix[0, 1]++;
                     }
                     for (int j = 0; j < number_of_test_samples_per_state_of_nature; j++)
                     {
-                        int class_index = a.testing(array_states_of_nature[class2].test_samples[j], F1, F2);
-                        if (class_index == class2)
-                            confusion_matrix[1, 0]++;
-                        else confusion_matrix[1, 1]++;
+                        int class_index = a.testing(outnorm[class2].test_samples[j], F1, F2);
+                        if (class_index < 0.0)
+                            confusion_matrix[1, 1]++;
+                        else confusion_matrix[1, 0]++;
                         //confusion_matrix[1, class_index]++;
                         //confusion_matrix[i, i]++;
                     } 

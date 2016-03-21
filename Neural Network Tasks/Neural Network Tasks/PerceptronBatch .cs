@@ -33,6 +33,7 @@ namespace Neural_Network_Tasks
             for (int Ep = 0; Ep < Epoch; ++Ep)
             {
                 Totalerror = 0;
+                double[,] Mis_X = new double[3, 1];
                 for (int i = 0; i < Classes[0].num_of_training_samples; ++i)
                 {
                     double V = new Adder().ApplySpeacialAdder(Bias, Weights[0], Weights[1], Classes[C1].training_samples[i].features_values[F1, 0], Classes[C1].training_samples[i].features_values[F2, 0]);
@@ -42,7 +43,10 @@ namespace Neural_Network_Tasks
                         d = 1;
                     else d = -1;
 
-                    Totalerror += ((d - Y) * (d - Y)) / 2;
+                    //Totalerror += ((d - Y) * (d - Y)) / 2;
+                    Mis_X[0, 0] += (d - Y);
+                    Mis_X[1, 0] += (d - Y) * Classes[C1].training_samples[i].features_values[F1, 0];
+                    Mis_X[2, 0] += (d - Y) * Classes[C1].training_samples[i].features_values[F2, 0];
 
                 }
 
@@ -55,14 +59,17 @@ namespace Neural_Network_Tasks
                         d = 1;
                     else d = -1;
 
-                    Totalerror += ((d - Y) * (d - Y)) / 2;
+                    Mis_X[0, 0] += (d - Y);
+                    Mis_X[1, 0] += (d - Y) * Classes[C2].training_samples[i].features_values[F1, 0];
+                    Mis_X[2, 0] += (d - Y) * Classes[C2].training_samples[i].features_values[F2, 0];
 
+                    //Totalerror += ((d - Y) * (d - Y)) / 2;
+                    // Mis_X += (d-Y)* Classes[C1].training_samples[i]
                 }
-                Totalerror /= (Classes[C1].num_of_training_samples + Classes[C2].num_of_training_samples);
+                //Totalerror /= (Classes[C1].num_of_training_samples + Classes[C2].num_of_training_samples);
 
-                Weights[0] = Weights[0] + lamda * (Totalerror);
-                Weights[1] = Weights[1] + lamda * (Totalerror);
-
+                Weights[0] = Weights[0] + lamda * Mis_X[1, 0];
+                Weights[1] = Weights[1] + lamda * Mis_X[2, 0];
 
             }
             return Weights;
