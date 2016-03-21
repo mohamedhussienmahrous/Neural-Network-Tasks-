@@ -11,8 +11,8 @@ namespace Neural_Network_Tasks
         public int sign(double Y,int C1,int C2)
         {
             if (Y >= 0)
-                return C1;
-            return C2;
+                return 1;
+            return -1;
         }
     }
 }

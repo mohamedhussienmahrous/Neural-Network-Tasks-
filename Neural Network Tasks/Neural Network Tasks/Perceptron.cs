@@ -29,7 +29,7 @@ namespace Neural_Network_Tasks
         }
         public double[] Training()
         {
-            double error = 0.0;
+            double error = 0;
             for (int Ep = 0; Ep < Epoch; ++Ep)
             {
 
@@ -37,10 +37,10 @@ namespace Neural_Network_Tasks
                 {
                     double V = new Adder().ApplySpeacialAdder(Bias, Weights[0], Weights[1], Classes[C1].training_samples[i].features_values[F1, 0], Classes[C1].training_samples[i].features_values[F2, 0]);
                     double Y = new ActivationFunctions().sign(V, C1, C2);
-                    int d = 0;
-                    if (d == Y)
-                        d = 1;
-                    else d = -1;
+                    double d = 1;
+                    //if (d == Y)
+                    //    d = 1;
+                    //else d = -1;
 
                     error = d - V;
 
@@ -54,10 +54,10 @@ namespace Neural_Network_Tasks
                 {
                     double V = new Adder().ApplySpeacialAdder(Bias, Weights[0], Weights[1], Classes[C2].training_samples[i].features_values[F1, 0], Classes[C2].training_samples[i].features_values[F2, 0]);
                     double Y = new ActivationFunctions().sign(V, C1, C2);
-                    int d = 0;
-                    if (d == Y)
-                        d = 1;
-                    else d = -1;
+                    double d = -1;
+                    //if (d == Y)
+                    //    d = 1;
+                    //else d = -1;
 
                     Weights[0] = Weights[0] + lamda * (d - Y) * Classes[C2].training_samples[i].features_values[F1, 0];
                     Weights[1] = Weights[1] + lamda * (d - Y) * Classes[C2].training_samples[i].features_values[F2, 0];
