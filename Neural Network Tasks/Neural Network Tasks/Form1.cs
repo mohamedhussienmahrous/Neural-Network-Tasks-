@@ -33,5 +33,11 @@ namespace Neural_Network_Tasks
 
             new Task_2().Show();
         }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+            new Task3().Show();
+
+        }
     }
 }
