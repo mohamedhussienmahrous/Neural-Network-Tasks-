@@ -15,6 +15,7 @@ namespace Neural_Network_Tasks
         public Tasks()
         {
             InitializeComponent();
+           
         }
 
         private void button1_Click(object sender, EventArgs e)

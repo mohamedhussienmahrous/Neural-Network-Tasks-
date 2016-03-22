@@ -28,9 +28,9 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea4 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend4 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Series series4 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend1 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series1 = new System.Windows.Forms.DataVisualization.Charting.Series();
             this.label1 = new System.Windows.Forms.Label();
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
@@ -47,8 +47,10 @@
             this.dataGridView_confusion_matrix = new System.Windows.Forms.DataGridView();
             this.textBox_overall_accuracy = new System.Windows.Forms.TextBox();
             this.label_overall_accuracy = new System.Windows.Forms.Label();
+            this.NNlayers = new System.Windows.Forms.DataGridView();
             ((System.ComponentModel.ISupportInitialize)(this.chart1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView_confusion_matrix)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.NNlayers)).BeginInit();
             this.SuspendLayout();
             // 
             // label1
@@ -121,7 +123,7 @@
             // 
             // textBox_file_path
             // 
-            this.textBox_file_path.Location = new System.Drawing.Point(661, 34);
+            this.textBox_file_path.Location = new System.Drawing.Point(710, 15);
             this.textBox_file_path.Name = "textBox_file_path";
             this.textBox_file_path.Size = new System.Drawing.Size(169, 20);
             this.textBox_file_path.TabIndex = 9;
@@ -129,7 +131,7 @@
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(848, 32);
+            this.button1.Location = new System.Drawing.Point(927, 12);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(140, 23);
             this.button1.TabIndex = 8;
@@ -139,23 +141,23 @@
             // 
             // chart1
             // 
-            chartArea4.Name = "ChartArea1";
-            this.chart1.ChartAreas.Add(chartArea4);
-            legend4.Name = "Legend1";
-            this.chart1.Legends.Add(legend4);
+            chartArea1.Name = "ChartArea1";
+            this.chart1.ChartAreas.Add(chartArea1);
+            legend1.Name = "Legend1";
+            this.chart1.Legends.Add(legend1);
             this.chart1.Location = new System.Drawing.Point(592, 225);
             this.chart1.Name = "chart1";
-            series4.ChartArea = "ChartArea1";
-            series4.Legend = "Legend1";
-            series4.Name = "Series1";
-            this.chart1.Series.Add(series4);
+            series1.ChartArea = "ChartArea1";
+            series1.Legend = "Legend1";
+            series1.Name = "Series1";
+            this.chart1.Series.Add(series1);
             this.chart1.Size = new System.Drawing.Size(475, 300);
             this.chart1.TabIndex = 21;
             this.chart1.Text = "chart1";
             // 
             // button2
             // 
-            this.button2.Location = new System.Drawing.Point(447, 164);
+            this.button2.Location = new System.Drawing.Point(927, 159);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(140, 23);
             this.button2.TabIndex = 20;
@@ -177,30 +179,39 @@
             this.dataGridView_confusion_matrix.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView_confusion_matrix.Location = new System.Drawing.Point(21, 252);
             this.dataGridView_confusion_matrix.Name = "dataGridView_confusion_matrix";
-            this.dataGridView_confusion_matrix.Size = new System.Drawing.Size(481, 234);
+            this.dataGridView_confusion_matrix.Size = new System.Drawing.Size(242, 150);
             this.dataGridView_confusion_matrix.TabIndex = 18;
             // 
             // textBox_overall_accuracy
             // 
-            this.textBox_overall_accuracy.Location = new System.Drawing.Point(156, 505);
+            this.textBox_overall_accuracy.Location = new System.Drawing.Point(112, 449);
             this.textBox_overall_accuracy.Name = "textBox_overall_accuracy";
-            this.textBox_overall_accuracy.Size = new System.Drawing.Size(258, 20);
+            this.textBox_overall_accuracy.Size = new System.Drawing.Size(133, 20);
             this.textBox_overall_accuracy.TabIndex = 17;
             // 
             // label_overall_accuracy
             // 
             this.label_overall_accuracy.AutoSize = true;
-            this.label_overall_accuracy.Location = new System.Drawing.Point(15, 505);
+            this.label_overall_accuracy.Location = new System.Drawing.Point(18, 449);
             this.label_overall_accuracy.Name = "label_overall_accuracy";
             this.label_overall_accuracy.Size = new System.Drawing.Size(88, 13);
             this.label_overall_accuracy.TabIndex = 22;
             this.label_overall_accuracy.Text = "Overall Accuracy";
+            // 
+            // NNlayers
+            // 
+            this.NNlayers.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.NNlayers.Location = new System.Drawing.Point(439, 54);
+            this.NNlayers.Name = "NNlayers";
+            this.NNlayers.Size = new System.Drawing.Size(240, 150);
+            this.NNlayers.TabIndex = 23;
             // 
             // Task3
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1088, 540);
+            this.Controls.Add(this.NNlayers);
             this.Controls.Add(this.label_overall_accuracy);
             this.Controls.Add(this.chart1);
             this.Controls.Add(this.button2);
@@ -221,6 +232,7 @@
             this.Text = "NN";
             ((System.ComponentModel.ISupportInitialize)(this.chart1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView_confusion_matrix)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.NNlayers)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -244,5 +256,6 @@
         private System.Windows.Forms.DataGridView dataGridView_confusion_matrix;
         private System.Windows.Forms.TextBox textBox_overall_accuracy;
         private System.Windows.Forms.Label label_overall_accuracy;
+        private System.Windows.Forms.DataGridView NNlayers;
     }
 }

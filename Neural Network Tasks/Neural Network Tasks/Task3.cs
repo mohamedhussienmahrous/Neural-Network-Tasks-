@@ -18,6 +18,13 @@ namespace Neural_Network_Tasks
         {
             InitializeComponent();
             object_view_handler = new Task_3_View_handler();
+            chart1.Series.Clear();
+            NNlayers.Rows.Clear();
+            NNlayers.Columns.Clear();
+            DataGridView_Helpers object_data_grid_view_helpers = new DataGridView_Helpers();
+            object_data_grid_view_helpers.add_grid_column("number", "nueorn per layer",new DataGridViewTextBoxCell(),NNlayers);
+            
+         
         }
 
         private void button1_Click(object sender, EventArgs e)
