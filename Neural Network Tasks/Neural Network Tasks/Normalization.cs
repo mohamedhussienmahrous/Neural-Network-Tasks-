@@ -14,7 +14,6 @@ namespace Neural_Network_Tasks
         int C1, C2;
         int F1, F2;
         Generic_State_Of_Nature[] afternormailzed;
-
         public Normalization(Generic_State_Of_Nature[] input, int C1, int C2, int feat1, int feat2)
         {
             this.c = input;
@@ -47,8 +46,6 @@ namespace Neural_Network_Tasks
             afternormailzed = c;
 
         }
-
-
         public Generic_State_Of_Nature[] makeNormalization()
         {
 
@@ -186,7 +183,7 @@ namespace Neural_Network_Tasks
                     }
                 }
             for (int a = 0; a < 4; a++)
-                mean[a] = (4 * (c[a].num_of_test_samples + c[a].num_of_training_samples));
+                mean[a] /= (3 * (c[0].num_of_test_samples + c[0].num_of_training_samples));
 
 
             for (int w = 0; w < 4; w++)

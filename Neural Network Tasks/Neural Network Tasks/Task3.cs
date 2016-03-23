@@ -21,23 +21,23 @@ namespace Neural_Network_Tasks
             object_view_handler = new Task_3_View_handler();
             chart1.Series.Clear();
             chart1.Visible = false;
-            NNlayers.Rows.Clear();
-            NNlayers.Columns.Clear();
-            DataGridView_Helpers object_data_grid_view_helpers = new DataGridView_Helpers();
-            object_data_grid_view_helpers.add_grid_column("number", "nueorn per layer",new DataGridViewTextBoxCell(),NNlayers);
-            
          
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
-            object_view_handler.handle_load_data_set_button_click(/*comboBox3, comboBox4, comboBox1, comboBox2,*/ this, textBox_file_path, dataGridView_confusion_matrix, textBox_overall_accuracy);
+            object_view_handler.handle_load_data_set_button_click( this,Epoch,Eta,NumberOfHidden, textBox_file_path, dataGridView_confusion_matrix,NNlayers, textBox_overall_accuracy);
 
         }
 
         private void textBox_file_path_TextChanged(object sender, EventArgs e)
         {
 
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            object_view_handler.Run();
         }
     }
 }

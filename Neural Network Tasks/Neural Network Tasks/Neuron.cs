@@ -14,6 +14,10 @@ namespace Neural_Network_Tasks
         public double Y;
         public double V;
         public double ErrorRate;
+        public Neuron(double Y)
+        {
+            this.Y = Y;
+        }
         public Neuron(double B, double n, int NumberOfWeights)
         {
             Bias = B;
@@ -21,11 +25,12 @@ namespace Neural_Network_Tasks
             Weights = new double[NumberOfWeights + 1];
             GenerateRandomWeights();
         }
-        private void CalculateV(double[] Features)
+        public void CalculateV(Layer L)
         {
             V = Bias * Weights[0];
-            for (int i = 0; i < Features.Length; ++i)
-                V += Features[i] * Weights[i + 1];
+            for (int i = 0; i < L.Neurons.Length; ++i)
+                V += L.Neurons[i].Y * Weights[i + 1];
+            this.CalculateY();
         }
         private void GenerateRandomWeights()
         {
@@ -38,8 +43,12 @@ namespace Neural_Network_Tasks
         }
         private void CalculateY()
         {
-           // Y = new ActivationFunctions().Sigmoid(V);
+            Y = new ActivationFunctions().Sigmoid(V,1);
         }
+        //public void CalculateSignalError()
+        //{
+        //    double DiffY = new ActivationFunctions().D_Sigmoid(V, 1);
+        //}
         public void Run(double[] Features)
         {
 

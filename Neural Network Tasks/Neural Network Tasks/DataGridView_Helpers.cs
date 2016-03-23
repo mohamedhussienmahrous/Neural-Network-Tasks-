@@ -23,7 +23,7 @@ namespace Neural_Network_Tasks
         public void add_grid_column(string name, string header, DataGridViewCell cell_template, DataGridView dgrdview)
         {
             DataGridViewColumn dgrdview_col = new DataGridViewColumn();
-            dgrdview_col.Width = column_width;
+            dgrdview_col.Width = 70;
             dgrdview_col.Name = name;
             dgrdview_col.HeaderText = header;
             dgrdview_col.CellTemplate = cell_template;
