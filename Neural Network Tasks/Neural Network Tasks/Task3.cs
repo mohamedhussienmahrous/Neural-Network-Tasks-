@@ -16,9 +16,11 @@ namespace Neural_Network_Tasks
 
         public Task3()
         {
+            
             InitializeComponent();
             object_view_handler = new Task_3_View_handler();
             chart1.Series.Clear();
+            chart1.Visible = false;
             NNlayers.Rows.Clear();
             NNlayers.Columns.Clear();
             DataGridView_Helpers object_data_grid_view_helpers = new DataGridView_Helpers();
