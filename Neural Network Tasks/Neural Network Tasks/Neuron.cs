@@ -49,9 +49,11 @@ namespace Neural_Network_Tasks
         //{
         //    double DiffY = new ActivationFunctions().D_Sigmoid(V, 1);
         //}
-        public void Run(double[] Features)
+        public void UpdateWeightss(Layer L)
         {
-
+            this.Weights[0] += ErrorRate * SignalError * Bias;
+            for(int i=0;i<L.NumberOfNeurons;++i)
+                this.Weights[i+1] += ErrorRate * SignalError * L.Neurons[i].Y;
         }
 
 

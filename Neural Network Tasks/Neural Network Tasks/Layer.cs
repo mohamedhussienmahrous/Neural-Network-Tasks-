@@ -27,10 +27,33 @@ namespace Neural_Network_Tasks
             for (int i = 0; i < this.Neurons.Length; ++i)
                 this.Neurons[i].CalculateV(L);
         }
-        public void CalcSigma()
+        public void CalculateSignalError(Layer L)
         {
-            for(int i=0;i<this.NumberOfNeurons;++i)
-                ///////
+            for (int i = 0; i < this.NumberOfNeurons; ++i)
+            {
+                double sum = 0;
+                for (int j = 0; j < L.Neurons.Length; ++i)
+                {
+                  sum+=L.Neurons[j].SignalError * L.Neurons[j].Weights[i + 1];
+                   
+                }
+                double DiffY = new ActivationFunctions().D_Sigmoid(this.Neurons[i].V, 1.0);
+                this.Neurons[i].SignalError = DiffY * sum;
+            }   
         }
+        public void CalculateOutputLayerSignalError(double[] Desired)
+        {
+            for (int i = 0; i < this.Neurons.Length; ++i)
+            {
+                double DiffY = new ActivationFunctions().D_Sigmoid(this.Neurons[i].V, 1);
+                this.Neurons[i].SignalError = (Desired[i] - this.Neurons[i].Y) * DiffY;
+             }
+        }
+        public void UpdateWeight(Layer L)
+        {
+            for (int i = 0; i < this.NumberOfNeurons; ++i)
+                this.Neurons[i].UpdateWeightss(L);
+        }
+
     }
 }

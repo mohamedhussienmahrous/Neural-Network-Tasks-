@@ -43,8 +43,14 @@ namespace Neural_Network_Tasks
                         for (int L = 1; L < AllLayers.Length; ++L)
                             AllLayers[L].Forward(AllLayers[L - 1]);
                         ////Back Propagation
-                        AllLayers[AllLayers.Length-1]
-
+                        ////Output Layer 
+                        AllLayers[AllLayers.Length - 1].CalculateOutputLayerSignalError(Map(c));
+                        ////All Hidden
+                        for (int x = AllLayers.Length - 2; x > 0; x--)
+                            AllLayers[x].CalculateSignalError(AllLayers[x + 1]);
+                        //////Update Weights
+                        for (int p = 1; p < AllLayers.Length; ++p)
+                            AllLayers[i].UpdateWeight(AllLayers[p - 1]);
 
 
 
@@ -63,6 +69,7 @@ namespace Neural_Network_Tasks
         public double[] MLPTesting(Sample InputSample)
         {
             double[] x = null;
+
             return x;
         }
     }
