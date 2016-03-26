@@ -34,16 +34,17 @@ namespace Neural_Network_Tasks
         }
         private void GenerateRandomWeights()
         {
-            Random rnd = new Random();
+            //Random rnd = new Random();
             for (int i = 0; i < Weights.Length; i++)
             {
-                double w= rnd.Next(0,11);
-                Weights[i] = w/10;
+               // double w= rnd.Next(0,11);
+                Weights[i] =1.0;
             }
         }
         private void CalculateY()
         {
-            Y = new ActivationFunctions().Sigmoid(V,1);
+           // Y = new ActivationFunctions().Sigmoid(V,1.0);
+            Y = new ActivationFunctions().Hyperb(V);
         }
         //public void CalculateSignalError()
         //{
@@ -52,8 +53,8 @@ namespace Neural_Network_Tasks
         public void UpdateWeightss(Layer L)
         {
             this.Weights[0] += ErrorRate * SignalError * Bias;
-            for(int i=0;i<L.NumberOfNeurons;++i)
-                this.Weights[i+1] += ErrorRate * SignalError * L.Neurons[i].Y;
+            for(int i=1;i<L.NumberOfNeurons;++i)
+                this.Weights[i] += ErrorRate * SignalError * L.Neurons[i].Y;
         }
 
 

@@ -10,17 +10,17 @@ namespace Neural_Network_Tasks
     {
         public int NumberOfNeurons;
         public Neuron[] Neurons;
-       public Layer(int NumberOfNeurons,double Eta,int NF)
+        public Layer(int NumberOfNeurons, double Eta, int NF)
         {
             this.NumberOfNeurons = NumberOfNeurons;
             this.Neurons = new Neuron[this.NumberOfNeurons];
             for (int i = 0; i < Neurons.Length; ++i)
-                Neurons[i] = new Neuron(1,Eta,NF);
+                Neurons[i] = new Neuron(1, Eta, NF);
         }
         public void SetY(double[,] F)
         {
-            for(int i=0;i<F.Length;++i)
-            this.Neurons[i].Y = F[i,0];
+            for (int i = 0; i < F.Length; ++i)
+                this.Neurons[i].Y = F[i, 0];
         }
         public void Forward(Layer L)
         {
@@ -32,22 +32,24 @@ namespace Neural_Network_Tasks
             for (int i = 0; i < this.NumberOfNeurons; ++i)
             {
                 double sum = 0;
-                for (int j = 0; j < L.Neurons.Length; ++i)
+                for (int j = 0; j < L.Neurons.Length; ++j)
                 {
-                  sum+=L.Neurons[j].SignalError * L.Neurons[j].Weights[i + 1];
-                   
+                    sum += L.Neurons[j].SignalError * L.Neurons[j].Weights[i + 1];
+
                 }
-                double DiffY = new ActivationFunctions().D_Sigmoid(this.Neurons[i].V, 1.0);
+                //double DiffY = new ActivationFunctions().D_Sigmoid(this.Neurons[i].V, 1.0);
+                double DiffY = new ActivationFunctions().D_Hyperb(this.Neurons[i].V);
                 this.Neurons[i].SignalError = DiffY * sum;
-            }   
+            }
         }
         public void CalculateOutputLayerSignalError(double[] Desired)
         {
             for (int i = 0; i < this.Neurons.Length; ++i)
             {
-                double DiffY = new ActivationFunctions().D_Sigmoid(this.Neurons[i].V, 1);
+                //double DiffY = new ActivationFunctions().D_Sigmoid(this.Neurons[i].V, 1);
+                double DiffY = new ActivationFunctions().D_Hyperb(this.Neurons[i].V);
                 this.Neurons[i].SignalError = (Desired[i] - this.Neurons[i].Y) * DiffY;
-             }
+            }
         }
         public void UpdateWeight(Layer L)
         {

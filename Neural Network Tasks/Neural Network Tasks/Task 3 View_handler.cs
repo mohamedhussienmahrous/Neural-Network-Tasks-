@@ -61,6 +61,11 @@ namespace Neural_Network_Tasks
         }
         public void Run()
         {
+            confusion_matrix = new int[3, 3];
+            for (int f = 0; f < 3; f++)
+                for (int x = 0; x < 3; x++)
+                    confusion_matrix[f, x] = 0;
+
             int[] w = GetNumberOfNeurins();
             MultiLayerPerceptron ML = new MultiLayerPerceptron(array_states_of_nature, Eta, Epochs, NumberOfHiddenLayers, w);
             ML.MLPTraining();
@@ -68,8 +73,21 @@ namespace Neural_Network_Tasks
             for (int i = 0; i < array_states_of_nature.Length; ++i)
                 for (int j = 0; j < array_states_of_nature[0].num_of_test_samples; ++j)
                 {
-                    output=ML.MLPTesting(array_states_of_nature[i].test_samples[j]);
+                    output = ML.MLPTesting(array_states_of_nature[i].test_samples[j]);
+                    confusion_matrix[i, des(output)]++;
+
                 }
+            display_results(confusion_matrix_control, overall_accuracy_control);
+            MessageBox.Show("Done Testing");
+        }
+
+        private int des(double[] hu)
+        {
+            double x = hu.Max();
+            for (int v = 0; v <= hu.Length; v++)
+                if (hu[v] >= x)
+                    return v;
+            return 0;
         }
 
         private int[] GetNumberOfNeurins()
@@ -92,25 +110,32 @@ namespace Neural_Network_Tasks
         }
         public void display_results(DataGridView dgrdv_confusion_matrix, TextBox textbox_overall_accuracy)
         {
-            //dgrdv_confusion_matrix.Rows.Clear();
-            //dgrdv_confusion_matrix.Columns.Clear();
-            //textbox_overall_accuracy.Text = overall_accuracy.ToString();
-            //DataGridView_Helpers object_data_grid_view_helpers = new DataGridView_Helpers();
-            //object_data_grid_view_helpers.add_grid_column("actions", "/", new DataGridViewTextBoxCell(), dgrdv_confusion_matrix);
+            dgrdv_confusion_matrix.Rows.Clear();
+            dgrdv_confusion_matrix.Columns.Clear();
+            textbox_overall_accuracy.Text = overall_accuracy.ToString();
+            DataGridView_Helpers object_data_grid_view_helpers = new DataGridView_Helpers();
+            object_data_grid_view_helpers.add_grid_column("actions", "/", new DataGridViewTextBoxCell(), dgrdv_confusion_matrix);
 
-            //object_data_grid_view_helpers.add_grid_column(array_states_of_nature[C1].label, array_states_of_nature[C1].label, new DataGridViewTextBoxCell(), dgrdv_confusion_matrix);
-            //object_data_grid_view_helpers.add_grid_column(array_states_of_nature[C2].label, array_states_of_nature[C2].label, new DataGridViewTextBoxCell(), dgrdv_confusion_matrix);
+            for (int b = 0; b < array_states_of_nature.Length;b++)
+                object_data_grid_view_helpers.add_grid_column(array_states_of_nature[b].label, array_states_of_nature[b].label, new DataGridViewTextBoxCell(), dgrdv_confusion_matrix);
 
 
-            //dgrdv_confusion_matrix.Rows.Add(array_states_of_nature[C1].label);
-            //dgrdv_confusion_matrix.Rows.Add(array_states_of_nature[C2].label);
-            //for (int i = 0; i < 2; i++)
-            //{
-            //    for (int j = 0; j < 2; j++)
-            //    {
-            //        dgrdv_confusion_matrix.Rows[i].Cells[j + 1].Value = confusion_matrix[i, j];
-            //    }
-            //}
+            dgrdv_confusion_matrix.Rows.Add(array_states_of_nature[0].label);
+            dgrdv_confusion_matrix.Rows.Add(array_states_of_nature[1].label);
+            dgrdv_confusion_matrix.Rows.Add(array_states_of_nature[2].label);
+            double sum=0.0;
+            for (int i = 0; i < 3; i++)
+            {
+                for (int j = 0; j < 3; j++)
+                {
+                    dgrdv_confusion_matrix.Rows[i].Cells[j + 1].Value = confusion_matrix[i, j];
+                    
+                }
+            }
+            for (int o = 0; o < array_states_of_nature.Length; o++)
+                sum+=confusion_matrix[o, o];
+                textbox_overall_accuracy.Text = ((sum) / (array_states_of_nature[0].num_of_test_samples * 3) * 100).ToString();
+
         }
     }
 }

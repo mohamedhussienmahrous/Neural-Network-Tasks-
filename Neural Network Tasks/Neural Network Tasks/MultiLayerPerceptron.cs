@@ -50,7 +50,7 @@ namespace Neural_Network_Tasks
                             AllLayers[x].CalculateSignalError(AllLayers[x + 1]);
                         //////Update Weights
                         for (int p = 1; p < AllLayers.Length; ++p)
-                            AllLayers[i].UpdateWeight(AllLayers[p - 1]);
+                            AllLayers[p].UpdateWeight(AllLayers[p - 1]);
 
 
 
@@ -68,8 +68,19 @@ namespace Neural_Network_Tasks
         }
         public double[] MLPTesting(Sample InputSample)
         {
-            double[] x = null;
+            double[] x = new double[AllLayers[AllLayers.Length - 1].Neurons.Length];
+            
+            AllLayers[0].SetY(InputSample.features_values);
+            
+            ///forward finished
+            for (int L = 1; L < AllLayers.Length; ++L)
+                AllLayers[L].Forward(AllLayers[L - 1]);
 
+            for (int i = 0; i < AllLayers[AllLayers.Length - 1].Neurons.Length; i++)
+            {
+                x[i] = AllLayers[AllLayers.Length - 1].Neurons[i].Y;
+
+            }
             return x;
         }
     }
