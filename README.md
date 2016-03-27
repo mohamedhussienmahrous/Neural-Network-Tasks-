@@ -14,6 +14,7 @@ Task 2
 3-the Batch Perceptron learning algorithm.
 
 Task 3
+
 1-Multi Linear Perceptron neural network.
 
 each Algorithm can see confusion matrix and overall accuracy.
