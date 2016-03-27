@@ -37,8 +37,8 @@ namespace Neural_Network_Tasks
                     sum += L.Neurons[j].SignalError * L.Neurons[j].Weights[i + 1];
 
                 }
-                //double DiffY = new ActivationFunctions().D_Sigmoid(this.Neurons[i].V, 1.0);
-                double DiffY = new ActivationFunctions().D_Hyperb(this.Neurons[i].V);
+                double DiffY = new ActivationFunctions().D_Sigmoid(this.Neurons[i].V, 1.0);
+               // double DiffY = new ActivationFunctions().D_Hyperb(this.Neurons[i].V);
                 this.Neurons[i].SignalError = DiffY * sum;
             }
         }
@@ -46,8 +46,8 @@ namespace Neural_Network_Tasks
         {
             for (int i = 0; i < this.Neurons.Length; ++i)
             {
-                //double DiffY = new ActivationFunctions().D_Sigmoid(this.Neurons[i].V, 1);
-                double DiffY = new ActivationFunctions().D_Hyperb(this.Neurons[i].V);
+                double DiffY = new ActivationFunctions().D_Sigmoid(this.Neurons[i].V, 1.0);
+                //double DiffY = new ActivationFunctions().D_Hyperb(this.Neurons[i].V);
                 this.Neurons[i].SignalError = (Desired[i] - this.Neurons[i].Y) * DiffY;
             }
         }

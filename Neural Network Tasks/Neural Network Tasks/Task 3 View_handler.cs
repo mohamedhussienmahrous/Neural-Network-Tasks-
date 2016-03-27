@@ -71,12 +71,13 @@ namespace Neural_Network_Tasks
             ML.MLPTraining();
             double[] output = new double[array_states_of_nature.Length];
             for (int i = 0; i < array_states_of_nature.Length; ++i)
+            {
                 for (int j = 0; j < array_states_of_nature[0].num_of_test_samples; ++j)
                 {
                     output = ML.MLPTesting(array_states_of_nature[i].test_samples[j]);
                     confusion_matrix[i, des(output)]++;
-
                 }
+            }
             display_results(confusion_matrix_control, overall_accuracy_control);
             MessageBox.Show("Done Testing");
         }
@@ -84,7 +85,7 @@ namespace Neural_Network_Tasks
         private int des(double[] hu)
         {
             double x = hu.Max();
-            for (int v = 0; v <= hu.Length; v++)
+            for (int v = 0; v < hu.Length; v++)
                 if (hu[v] >= x)
                     return v;
             return 0;
@@ -128,7 +129,7 @@ namespace Neural_Network_Tasks
             {
                 for (int j = 0; j < 3; j++)
                 {
-                    dgrdv_confusion_matrix.Rows[i].Cells[j + 1].Value = confusion_matrix[i, j];
+                    dgrdv_confusion_matrix.Rows[i].Cells[j].Value = confusion_matrix[i, j];
                     
                 }
             }
