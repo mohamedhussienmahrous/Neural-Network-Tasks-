@@ -17,4 +17,9 @@ Task 3
 
 1-Multi Linear Perceptron neural network.
 
+Task 4
+Radial Basis Function Neural Network
+1-Kmeans.
+2-The Least Mean Square Learning Algorithms.
+
 each Algorithm can see confusion matrix and overall accuracy.
